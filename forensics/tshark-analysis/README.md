@@ -392,4 +392,45 @@ tshark -r Call_to_Voicemail-SIPTLS-RTP.pcap -Y "udp.port == 4000" -d udp.port==4
 ```
 
 ## 13 ) Preference values - SSL Decryption :
+Command for preference :
+```
+tshark -G currentprefs
+
+// -G for preference value.
+// currentprefs displays huge list of preferences.
+
+tshark -G currentprefs | grep ssl
+```
+
+Now checking on the RSA exchange traffic :
+```
+wireshark HTTPS_traffic_RSA_Exchange.pcap &
+```
+
+Apply a filter for ssl.
+In SSL various different cipher suites are used.
+
+Under Secure Sockets Layer, TLS 1.2, Handshake protocol, cipher suites, check the list of cipher exchange happening.
+
+# To decrypt the same cipher in tshark(http)  :
+```
+tshark -G currentprefs | grep ssl
+
+tshark -r HTTPS_traffic_RSA_Exchange.pcap -o "ssl.keys_list:0.0.0.0,443,http,private.key" -q -z http,tree
+```
+
+To print the http traffic:
+```
+tshark -r HTTPS_traffic_RSA_Exchange.pcap -o "ssl.keys_list:0.0.0.0,443,http,private.key" -Y http
+```
+
+#### For RSA:
+```
+tshark -r HTTPS_traffic_RSA_Exchange.pcap -o "ssl.keys_list:0.0.0.0,443,http,private.key" -q -z io,phs
+
+tshark -r HTTPS_traffic_RSA_Exchange.pcap -o "ssl.keys_list:0.0.0.0,443,http,private.key" -q -z io,phs,ssl
+```
+
+## 14 ) Preference values - SSL Decryption :
+
 
