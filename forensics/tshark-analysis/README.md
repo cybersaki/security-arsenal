@@ -188,3 +188,52 @@ tshark -r tcp80.pcap -Y 'http.request.method =="GET"' | less
 ```
 
 ## 6 ) Packet field extraction :
+There are two files provided. First considering the traffic pcap.
+
+#### First monitoring the file Wifi_traffic.pcap:
+```
+wireshark Wifi_traffic.pcap
+```
+
+The point is to extract the SSID="Security tube" from every beacon frame.
+
+This tag : wlanc.fc.type_subtype == 0x0008 has common SSID field in all the packets :
+```
+tshark -r Wifi_traffic.pcap -Y ' wlanc.fc.type_subtype == 0x0008 '
+```
+
+#### Now to extract the SSID field from the tags :
+```
+tshark -r Wifi_traffic.pcap -Y ' wlanc.fc.type_subtype == 0x0008 ' -Tfields -e wlan.ssid | less
+```
+Note 1 : -Tfields is to export fields
+Note 1 : -e mention the field
+
+Some null values will be there. To consider non-null SSID's, Some SSIDs have less tag length. So we have to check them in wireshark for Tag length to neglect.
+Apart from that, we can extract the bssid of the SSID also.
+```
+tshark -r Wifi_traffic.pcap -Y ' wlanc.fc.type_subtype == 0x0008 ' -Tfields -e wlan.ssid -e wlan.bssid | less
+```
+
+Now to monitor the HTTP traffic:
+```
+wireshark HTTP_traffic.pcap &
+```
+
+#### To extract the URI :
+```
+tshark -r HTTP_traffic.pcap -Y 'http.request.method == "GET"' -Tfields -e http.request.uri | less
+```
+
+#### To extract the URI along with host name :
+```
+tshark -r HTTP_traffic.pcap -Y 'http.request.method == "GET"' -Tfields -e http.host -e http.request.uri | less
+```
+
+To display headers for the extracted packets:
+```
+tshark -r HTTP_traffic.pcap -Y 'http.request.method == "GET"' -Tfields -e http.host -e http.request.uri -E header=y | less
+```
+
+## 7 ) Packet extraction + sort + uniq :
+
