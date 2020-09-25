@@ -97,5 +97,44 @@ tshark -i ens33
 ```
 
 ## 3 ) Writing and exporting packet data :
+Run ping in another terminal. Now we have to save these packets in a captured file.
 
+#### Write an export :
+```
+tshark -i ens33 20 -w icmp.pcap
+```
+Note 1: 20 is the packet count. If no count is mentioned, then it will keep capturing.
+Note 2: -w is for writing the export.
+
+#### To read a captured file :
+```
+tshark -r icmp.pcap
+```
+
+#### To see the details of the packet(verbose) :
+```
+tshark -r icmp.pcap -c 1 -V
+```
+
+#### Much more details of the header(For each packet wise) :
+```
+tshark -T x //(Basic)
+
+tshark -r icmp.pcap -T psml | less //(Actual one)
+
+tshark -r icmp.pcap -T pdml //(Very delicate parsed actual data for each packet)
+
+tshark -r icmp.pcap -T pdml > icmp.pdml //(Save the pdml file)
+
+tshark -r icmp.pcap -T -c 1 json | less
+```
+Note : Code beautify can be used to read the pdml file to readable format.
+
+#### For elasticsearch engineers:
+```
+tshark -r icmp.pcap -T -c 1 -T ek
+```
+Note : This dump can be fed into elasticsearch for analysis.
+
+## 4 ) PDML-Packets to HTML :
 
