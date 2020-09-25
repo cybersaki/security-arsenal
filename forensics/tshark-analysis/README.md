@@ -365,4 +365,31 @@ Incase if recording goes more than 10, files will be overwritten and the numberi
 For example 001,002 to 010 will change to 011,012,013... 020 etc. Only 10 files will remain.
  
 ## 12 ) Decode packet as :
+#### Case study: SIP-TLS + RTP
+* Voip traffic:
+	* SIP over TLS but RTP not encrypted
+
+* Wireshark and other tools depend on SIP to decode RTP
+	* Rely on SDP packets
+	* These are encrypted
+
+* Assist wireshark by decoding UDP as RTP.
+
+Now opening wireshark and checking UDP packets, the traffic will be there.
+Clicking on a packet, select decode as and give the protocol required in the option.
+
+#### Procedure for tshark:
+```
+tshark -r Call_to_Voicemail-SIPTLS-RTP.pcap -Y rtp
+
+tshark -r Call_to_Voicemail-SIPTLS-RTP.pcap -Y "udp.port == 4000"
+
+tshark -r Call_to_Voicemail-SIPTLS-RTP.pcap -Y "udp.port == 4000" -q -z rtp,streams
+
+tshark -r Call_to_Voicemail-SIPTLS-RTP.pcap -Y "udp.port == 4000" -d udp.port==4000,rtp
+
+tshark -r Call_to_Voicemail-SIPTLS-RTP.pcap -Y "udp.port == 4000" -d udp.port==4000,rtp -z rtp,streams
+```
+
+## 13 ) Preference values - SSL Decryption :
 
