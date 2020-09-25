@@ -161,4 +161,30 @@ firefox icmp.html &
 ```
 
 ## 5 ) Capture and display filter :
+* Capture filter:
+	* Low level filter applied by the packet capturing library.
+	* This is enforced using BPF(Berkeley packet filter) during sniffing.
+	* Ensures only packets we are interested in are captured.
+	* Greatly reduces the load for Tshark/Wireshark/Analysis tool.
 
+#### Capture only TCP port 80 traffic(example) :
+```
+tshark -i ens33 -c 10 -f "tcp port 80" -w tcp80.pcap
+```
+
+* Display filters:
+	* Allows us to view a subsection of the captured packets based on a filter expression.
+	* Helps in zeroing down on interesting packets
+	* Display and capture filters have different syntax
+	* Display filter expressions are more granular
+
+Now in wireshark, check the requests passing. 
+We find that http.request.method =="GET" is most traversed if you browse.
+
+#### So validating the same filter :
+```
+tshark -r tcp80.pcap -Y 'http.request.method =="GET"' | less
+// -Y is single pass display filter
+```
+
+## 6 ) Packet field extraction :
