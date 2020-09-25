@@ -95,3 +95,7 @@ Now it will display UP,BROADCAST,RUNNING,PROMISC,MULTICAST
 ```
 tshark -i ens33
 ```
+
+## 3 ) Writing and exporting packet data :
+
+
