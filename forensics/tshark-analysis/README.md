@@ -491,9 +491,65 @@ chmod a+x capturedemo.py
 It will print out the fields in live format.
 
 ## 15 ) Python automation - pyshark deep dive :
+Load the pyshark modules :
+```
+python3
 
+import pyshark
 
+capture = pyshark.LiveCapture(interface='ens33')
 
+capture.sniff(timeout=10)
 
+capture
+```
+Ping google in another terminal.
 
+#### Analysing the packets :
+```
+pkt = capture[0]
 
+pkt
+
+pkt.pretty_print
+
+dir(pkt) //prints the attributes
+
+pkt.captured_length
+
+pkt.layers //Shows arrays of layers - DNS, UDP, IP.
+
+pkt.eth //Displays the ethernet layer
+
+dir(pkt.eth) //Reading the attributes of eth layer
+
+pkt.eth.src //displays source mac address
+
+pkt.eth.dst //displays destination mac address
+
+pkt.ip //displays IP layer
+
+pkt.ip.src
+
+pkt.ip.dst
+
+pkt.ip.layer_name //Displays the layer name
+
+pkt.eth.layer_name
+
+pkt.eth.pretty_print() //Selectively prints eth layer in pretty format
+
+pkt.ip.pretty_print()
+
+pkt.udp.pretty_print()
+
+dir(pkt.udp)
+
+pkt.udp.srcport //displays the source port
+
+pkt.udp.dstport //displays the destination port.
+
+dir(pkt.dns) 
+
+pkt.dns.qry_name //displays the query name of website monitored.
+```
