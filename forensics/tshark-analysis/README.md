@@ -259,4 +259,34 @@ tshark -r WiFi_traffic.pcap -Y 'wlan.fc.type_subtype == 0x0008'-Tfields -e wlan.
 ```
 
 ## 8 ) Tshark summaries - Protcols, summaries and read filters :
+```
+wireshark Wifi_traffic.pcap
+```
 
+In statistics tab, protocol hierarchy of pcap file will be show with other statistics.
+
+#### -z is used to work on statistics :
+```
+tshark -z  help
+
+tshark -r WiFi_traffic.pcap -z io,phs
+
+tshark -r WiFi_traffic.pcap -q -z io,phs //q - quiet mode
+```
+
+For example, specify the filter, if ip packets :
+```
+tshark -r WiFi_traffic.pcap -q -z io,phs,ip
+```
+
+For running with a specific bssid :
+```
+tshark -r WiFi_traffic.pcap -q -z io,phs,'wlan.bssid=<mac>'
+```
+
+For using a 2 pass filter:
+```
+tshark -r WiFi_traffic.pcap -2 -R "wlan.bssid == <mac> -q -z io,phs
+```
+
+## 9 ) Tshark summaries - conversations and endpoints :
