@@ -290,3 +290,41 @@ tshark -r WiFi_traffic.pcap -2 -R "wlan.bssid == <mac> -q -z io,phs
 ```
 
 ## 9 ) Tshark summaries - conversations and endpoints :
+Navigate to Statistics tab in wireshark and check endpoints option.
+
+If we check other tabs like IPV4, IPV6,TCP 152, UDP 78.
+
+There is int types in the right bottom and if we select, IEEE 802.11 and once enabled, we have wireless information.
+
+So simulating the same in tshark :
+#### Endpoints
+```
+tshark -z help
+
+tshark -r Wifi_traffic.pcap -q -z endpoints,wlan
+
+tshark -r Wifi_traffic.pcap -q -z endpoints,wlan,'wlan.bssid == <mac>'
+
+tshark -r Wifi_traffic.pcap -q -z endpoints,udp
+```
+
+Apart from endpoints, there are conversations.
+This allows us to tie up relations between endpoints.
+
+In wireshark it is located in Statistics -> Conversations.
+Enable for wifi, IEEE 802.11.
+#### Conversations
+```
+tshark -r Wifi_traffic.pcap -q -z conv,wlan
+
+tshark -r Wifi_traffic.pcap -q -z conv,wlan,'wlan.bssid == <mac>'
+
+tshark -r Wifi_traffic.pcap -q -z conv,ip
+
+tshark -r Wifi_traffic.pcap -q -z conv,tcp
+
+tshark -r Wifi_traffic.pcap -q -z conv,udp
+```
+
+## 10 ) Tshark summaries - miscellaneous :
+
