@@ -137,4 +137,28 @@ tshark -r icmp.pcap -T -c 1 -T ek
 Note : This dump can be fed into elasticsearch for analysis.
 
 ## 4 ) PDML-Packets to HTML :
+First capture a few packets and output using PDML:
+```
+tshark -i ens33 -w icmp.pcap 
+
+tshark -r icmp.pcap -T pdml > icmp.xml
+```
+
+Now we need to convert the pcap to html. 
+Wireshark already has a pdml2html.xsl to convert.
+For tshark we need xsltproc.
+
+#### Installation and converting into html:
+```
+sudo apt install xsltproc
+
+xsltproc /usr/share/wireshark/pdml2html.xsl icmp.xml > icmp.html
+```
+
+#### Open the file in firefox
+```
+firefox icmp.html &
+```
+
+## 5 ) Capture and display filter :
 
