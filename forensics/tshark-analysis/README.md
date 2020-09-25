@@ -432,5 +432,68 @@ tshark -r HTTPS_traffic_RSA_Exchange.pcap -o "ssl.keys_list:0.0.0.0,443,http,pri
 ```
 
 ## 14 ) Preference values - SSL Decryption :
+#### Installation and loading :
+```
+apt install pip3
+
+pip3 install pyshark 
+
+python3
+
+import pyshark
+```
+
+#### Reading from a live interface:
+```
+capture = pyshark.LiveCapture(interface='ens33')
+
+capture.sniff(timeout=10)
+
+capture
+```
+Ping google in another terminal and check on the packets.
+
+To print the packets :
+```
+capture[0] 
+// Displays as ICMP Packet. 0 is first packet. 'n' can vary.
+
+capture[0].pretty_print()
+//Print the whole entire packet information like in wireshark
+```
+
+Now to print all the live capture in a pretty print :
+```
+vi capturedemo.py
+```
+
+Write the following code in the python file :
+```
+#!/usr/bin/python3
+
+import pyshark
+import sys
+
+capture = pyshark.LiveCapture(interface=sys.argv[1], bpf_filter=sys.argv[2])
+
+for packet in capture.sniff_continuously(packet_count=10);
+	packet.pretty_print()
+
+```
+
+Run the file with an interface:
+```
+chmod a+x capturedemo.py
+
+./capturedemo.py ens33 icmp
+```
+
+It will print out the fields in live format.
+
+## 15 ) Python automation - pyshark deep dive :
+
+
+
+
 
 
