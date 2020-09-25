@@ -346,6 +346,23 @@ Note : sip and rtp are VOIP related protocols.
 ```
 
 ## 11 ) Multi-File capture (Ring buffer) :
+#### Out of disk?
+* Captures can get very large
+	* Out of dis space
+	* Difficult to keep monitoring
 
+* Circular/Ring buffer
+	* Once end of buffer is reached, start overwriting oldest data
+	* Very common data structure for networking.
+```
+tshark -i ens33 -w icmp.pcap -b filesize:1 -b files:10
+```
+-b is for ring buffer option.
+file size is an option. 1 is 1kb.
+files 10 is 10 files.
 
+Incase if recording goes more than 10, files will be overwritten and the numbering system of the files will change.
+For example 001,002 to 010 will change to 011,012,013... 020 etc. Only 10 files will remain.
+ 
+## 12 ) Decode packet as :
 
