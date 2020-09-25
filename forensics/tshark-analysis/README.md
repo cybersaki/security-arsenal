@@ -237,3 +237,26 @@ tshark -r HTTP_traffic.pcap -Y 'http.request.method == "GET"' -Tfields -e http.h
 
 ## 7 ) Packet extraction + sort + uniq :
 
+Select type/subtype beacon and copy the filter from wireshark as previous.
+
+```
+tshark -r WiFi_traffic.pcap -Y 'wlan.fc.type_subtype == 0x0008'-Tfields -e wlan.ssid -e wlan.bssid | less
+```
+
+Now to get the unique set of SSIDs, sort is used.
+```
+tshark -r WiFi_traffic.pcap -Y 'wlan.fc.type_subtype == 0x0008'-Tfields -e wlan.ssid -e wlan.bssid | sort | less
+```
+
+To get only the unique output :
+```
+tshark -r WiFi_traffic.pcap -Y 'wlan.fc.type_subtype == 0x0008'-Tfields -e wlan.ssid -e wlan.bssid | sort | uniq
+```
+
+Get the current channel of the packets:
+```
+tshark -r WiFi_traffic.pcap -Y 'wlan.fc.type_subtype == 0x0008'-Tfields -e wlan.ssid -e wlan.bssid -e wlan.ds.current_channel | sort | uniq
+```
+
+## 8 ) Tshark summaries - Protcols, summaries and read filters :
+
