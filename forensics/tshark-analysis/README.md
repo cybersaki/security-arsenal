@@ -327,4 +327,25 @@ tshark -r Wifi_traffic.pcap -q -z conv,udp
 ```
 
 ## 10 ) Tshark summaries - miscellaneous :
+Go to Analyze -> Expert information to checking detailed summary
+```
+tshark -r HTTP traffic.pcap -q -z http,tree
+```
+
+The response traffic will be beautifully shown in sections.
+
+#### VOIP Related :
+```
+tshark -z help
+
+tshark -r Conference_Call_three_parties.pcap -q -z sip,stat
+
+tshark -r Conference_Call_three_parties.pcap -q -z rtp,streams
+
+Note : sip and rtp are VOIP related protocols.
+```
+
+## 11 ) Multi-File capture (Ring buffer) :
+
+
 
