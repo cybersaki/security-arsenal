@@ -6,3 +6,4 @@ Security pentesting cheatsheet, tools for SAST/DAST.
 3) Web
 4) Wifi
 5) Reverse Engineering
+6) Active Directory
