@@ -53,8 +53,8 @@ Import-Module <modulepath>
 Get-Command -Module <Module name>
 ```
 
-## 02 - Domain Enumeration - 01
 -------------------------------
+## 02 - Domain Enumeration - 01
 
 Lets start with Domain Enumeration and map various entities, trusts, relationships and privileges for the target domain.
 The enumeration can be done by using Native executables and .NET classes:
@@ -167,8 +167,9 @@ Note : Use Get-UserProperty -Properties logoncout to find decoy users with no lo
 Find-UserField -SearchField Description -SearchTerm "built" (Powerview)
 Get-ADUser -Filter 'Description -like "* built*"' -Properties Description | select name,Description
 ```
-## 03 - Domain Enumeration - 02
+
 -------------------------------
+## 03 - Domain Enumeration - 02
 
 #### Get a list of computers in the current domain
 ```
@@ -253,8 +254,8 @@ Get-NetFileServer (PowerView)
 ```
 Note : This will look for a high value target -File server, exchange server or sharepoint server etc.
 
-## 04 - Domain Enumeration - 03
 -------------------------------
+## 04 - Domain Enumeration - 03
 
 #### Get list of GPO in current domain.
 ```
