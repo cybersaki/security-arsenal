@@ -1,5 +1,5 @@
 # Active Directory Red teaming Security cheatsheet :
-#### (commands only)
+#### (commands only, for detailed, look at basic notes)
 
 -------------
 ## 01 - Intro
