@@ -334,5 +334,196 @@ Invoke-ACLScanner -ResolveGUIDs
 Get-PathAcl -Path "\\dcorp-dc.dollarcorp.moneycorp.local\sysvol"
 ```
 
-05 - Domain Enumeration - 04
-----------------------------
+-------------------------------
+## 05 - Domain Enumeration - 04
+
+### Domain trust mapping :
+#### Get a list of all domain trusts for all the current domain
+```
+Get-NetDomainTrust (PowerView)
+Get-NetDomainTrust -Domain us.dollarcorp.moneycorp.local (PowerView)
+
+Get-ADTrust(ActiveDirectoryModule)
+Get-ADTrust -Identity us.dollarcorp.moneycorp.local(ActiveDirectoryModule)
+```
+
+### Forest mapping:
+#### Get details about the current forest
+```
+Get-NetForest (PowerView)
+Get-NetForest -Forest eurocorp.local (PowerView)
+Get-ADForest (ActiveDirectoryModule)
+Get-ADForest -Identity eurocorp.local (ActiveDirectoryModule)
+```
+
+#### Get all the domains in the current forest
+```
+Get-NetForestDomain (PowerView)
+Get-NetForestDomain -Forest eurocorp.local (Powerview)
+(Get-ADForest).Domains (ActiveDirectoryModule)
+```
+
+#### Get all global catalogs for the current forest
+```
+Get-NetForestCatalog (PowerView)
+Get-NetForestCatalog -Forest eurocorp.local (PowerView)
+Get-ADForest | select -ExpandProperty GlobalCatalogs (ActiveDirectoryModule)
+```
+
+#### Map trusts of a forest
+```
+Get-NetForestTrust (PowerView)
+Get-NetForestTrust -Forest eurocorp.local (PowerView)
+Get-ADTrust -Filter 'msDS-TrustForestTrustInfo -ne "$null"' (ActiveDirectoryModule)
+```
+
+### Domain enumeration - User hunting
+####  Find all machines on the current domain where the current user has local admin access
+```
+Find-LocalAdminAccess -Verbose (PowerView)
+```
+
+#### This function queries the DC of the current or provided domain for a list of computers(Get-NetComputer) and then use multi-threaded
+```
+Invoke-CheckLocalAdminAccess on each machine.
+```
+
+Note : This can be done with the help of remote administration tools like WMI and powershell remoting.Pretty useful in cases ports(RPC and SMB) usd by Find-LocalAdminAccess are blocked.
+
+#### See :
+```
+Find-WMILocalAdminAccess.ps1 (Powerview)
+```
+
+#### Find local admins on all machines of the domain (needs administrator privs on non-dc machines).
+```
+Invoke-EnumerateLocalAdmin -Verbose (Powerview)
+```
+
+Note: This function queries the DC of the current or provided domain for a list of computers(Get-NetComputer) and then use multi-threaded Get-NetLocalGroup on each machine.
+(Powerview)
+
+#### Find computers where a domain admin(or specified user/group) has sessions:
+```
+Invoke-UserHunter (Powerview)
+Invoke-UserHunter -GroupName "RDPUsers" (Powerview)
+```
+
+Note : This function queries the DC of the current or provided domain for members of the given group (Domain Admins by default) using Get-NetGroupMember, gets a list of computers(Get-NetComputer) and list sessions and logged on users(Get-NetSession/Get-NetLoggedon) from each machine (Powerview)
+
+#### To confirm admin access
+```
+Invoke-UserHunter -CheckAccess (Powerview)
+```
+
+Now in powershell 1:
+
+PS C:\AD\Tools> . .\Find-WMILocalAdminAccess.ps1
+
+Find-WMILocalAdminAccess -ComputerFle .\computers.txt -Verbose
+
+
+#### Find computers where a domain admin is logged-in
+```
+Invoke-UserHunter -Stealth (PowerView)
+```
+
+Note : This option queries the DC of the current or provided domain for member sof the given group(Domain Admins by default) using Get-NetGroupMember, gets a list_only_of high traffic servers (DC,File Servers and Distributed File servers) for less traffic generation and list sessions and logged on users(Get-NetSession/Get-NetLoggedon) from each machine.
+(PowerView)
+
+Note : 
+-Netcease is a script which changes permissions on the NetSessionEnum method by removing permission for Authenticated Users group.
+-This fails many of the attacker's session enumeration and hence user hunting capabilities.
+	.\NetCease.ps1
+-Another interesting script from the same author is SAMRi10 which hardens Windows 10 and Server 2016 against enumeration which uses SAMR protocol(like net.exe)
+
+-------------------------------
+## 06 - Local Privilege Escalation - 01
+
+#### We can use below tools for complete coverage
+	- PowerUP:
+	- BeRoot:
+	- Privesc:
+
+### Services issues using PowerUp:
+####  Get Services with unquoted paths and a space in their name.
+```
+Get-ServiceUnquoted -Verbose (Powerview)
+```
+
+####  Get services where the current user can write to its binary path or change arguments to the binary.
+```
+Get-ModifiableServiceFile -Verbose (Powerview)
+```
+
+####  Get the services whose configuration current user can modify. (Powerview)
+```
+Get-ModifiableService-Verbose (Powerview)
+```
+
+Practice. In powershell 1:
+
+PS C:\AD\Tools> C:\FTPServer\FTP Server\filezilla\filezilla.exe
+
+Note : Notice the space in FTP Server.
+Also filezilla is not vulnerable to this, just for example.
+
+```
+GetWmiObject -class win32_service | fl *
+GetWmiObject -class win32_service | select pathname
+```
+
+#### Run all checks from:
+	-Powerup
+	 Inboke-AllChecks (Powerview)
+
+	-BeRoot is an executable:
+	.\beRoot.exe (Powerview)
+
+	-Privesc
+	 Invoke-PrivEsc (Powerview)
+ 
+Now in powershell 1:
+
+C:\AD\Tools> . .\PowerUp.ps1
+
+```
+Invoke-AllChecks
+
+GetWmiObject -class win32_service | select pathname
+```
+Note : Abusefunction will be display the path which can be hijacked.
+
+Next check service permissions, and now in this path.
+Here we can make it into the new executable itself. And CanRestart means could restart the service.
+
+Now for beRoot :
+cd .\beRoot\
+PS C:\AD\Tools\beRoot> .\beRoot.exe
+
+Look only for service issues right now. It will be in the first.
+
+Now checking privesc :
+cd ..\Privesc-master\Privesc-master\
+PS C:\AD\Tools\Privesc-master\Privesc-master> . .\privesc.ps1
+
+```
+Invoke-privesc
+```
+Check for "services with space in path" and check for "service permissions".
+
+-------------------------------
+## 07 - Local Privilege Escalation - 02
+
+
+
+
+
+
+
+
+
+
+
+
+
