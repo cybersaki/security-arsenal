@@ -1,7 +1,7 @@
 # Android Security Cheatsheet :
 
 -----------------------
-01_Android
+## 01_Android
 
 - Android internals
 - Permission Model
@@ -27,7 +27,7 @@ AOSP
 - http://forum.xda-developers.com/android
 
 -----------------------
-02_Android_architecture
+## 02_Android_architecture
 
 Android architecure is divided into four categories
 
@@ -51,7 +51,7 @@ Setting up the Pentest VM
 - Download from santoku website and install in virtual box
 
 -----------------------
-03_Android_Permissions
+## 03_Android_Permissions
 
 Android Permissions
 
@@ -102,7 +102,7 @@ Going deeper
 - Permission to group mappins located at /etc/permissions/platform.xml
 
 -----------------------
-04_Android_Security_and_Exploitation
+## 04_Android_Security_and_Exploitation
 
 Android Applications
 
@@ -173,7 +173,7 @@ keytool -printcert -file ALIAS_NA.RSA
 ```
 
 -----------------------
-05_Setting_up_Genymotion
+## 05_Setting_up_Genymotion
 
 Download and install genymotion
 
@@ -191,7 +191,7 @@ adb devices
 Note : now android device connected will be displayed.
 
 -----------------------
-06_Android_app_components
+## 06_Android_app_components
 
 - Activities
 - Services
@@ -278,7 +278,7 @@ Broadcast Receivers
 - Used by a lot of malwares
 
 -----------------------
-07_Dex_analysis
+## 07_Dex_analysis
 
 What is a dex
 
@@ -325,7 +325,7 @@ DalvikVM
 - Dalvikvm -cp classes.dx classname
 
 -----------------------
-08_Android-Debug-bridge
+## 08_Android-Debug-bridge
 
 Introduction to ADB
 
@@ -362,7 +362,7 @@ adb push srcaddr destaddr
 adb pull srcaddr destaddr
 ```
 -----------------------
-09_Logging-based-vulnerabilities
+## 09_Logging-based-vulnerabilities
 
 Android logcat 
 
@@ -398,7 +398,7 @@ grep -iRn 'Log.d' .
 Note: We will be seeing more details on open bugs here.
 
 -----------------------
-10_Reversing_Android_apps
+## 10_Reversing_Android_apps
 
 Load the cocon CTF app from COCON CTF by anand srivastava:
 
@@ -467,7 +467,7 @@ adb install New_Cocon.apk
 Note : Now if you open Genymotion and click the app, we will get the key.
 
 -----------------------
-11_Reversing_Android_apps
+## 11_Reversing_Android_apps
 
 Analysing malware samples
 
@@ -530,7 +530,7 @@ Note : Here if we look, it listens for android.provider.Telephony.SMS_RECEIVED a
 If we look down, there is an email credentials to which the malware should be transmitting the virus.
 
 -----------------------
-13_Traffic Analysis
+## 12_Traffic Analysis
 
 Traffic Interception
 
@@ -564,7 +564,23 @@ mv caecert.der caecert.crt
 Now we can install the certificate.
 
 -----------------------
-14_Leaking_Content_Providers
+## 13_SSL_Pinning
+
+Bypassing SSL Pinning : 
+- App : SSLPinningExample.apk
+- Decompile the APK
+- Find the methods responsible for validating the trustness of the cert
+- Patch the method by simply removing the code lines
+- Refer to : Bypassing SSL Pinning paper by Denis Andzakovic
+
+Setting breakpoints at HttpsURLConnection
+- Setting breakpoints at HttpsURLConnection.setSocketFactory()
+- Modifying the local variables
+- AndroidSSLTrustKiller by iSecPartners
+- Will see more of it in iOS
+
+-----------------------
+## 14_Leaking_Content_Providers
 
 App communicating with a database(sqlite)
 
@@ -630,7 +646,7 @@ adb shell content query --uri content://com.threebanana.notes.provider.NotePad/n
 Here you can see the text fields.
 
 -----------------------
-15_Drozer-Kung-Fu
+## 15_Drozer-Kung-Fu
 
 Introduction to Drozer
 
@@ -663,7 +679,7 @@ run app.provider.query content://com.threebanana.notes.provider.NotePad/notes --
 ```
 
 -----------------------
-16_Read_based_content_provider_vulnerability
+## 16_Read_based_content_provider_vulnerability
 
 Adobe Reader Vulnerability
 
@@ -722,7 +738,7 @@ run app.provider.readcontent://com.adobe.reader.fileprovider/../../../../mnt/sdc
 Note : It will display the text
 
 -----------------------
-17_Advanced Drozer_Kung_Fu
+## 17_Advanced Drozer_Kung_Fu
 
 CSIP Simple Vulnerability
 
@@ -805,7 +821,7 @@ run app.provider.query content://com.csipsimple.db/outgoing_filters/ --vertical
 Now it works.
 
 -----------------------
-18_Drozer_Scripting
+## 18_Drozer_Scripting
 
 - Could be used to automate tasks
 - Build your own private repo of vulns/exploits
@@ -867,7 +883,7 @@ run ex.device.info
 ```
 
 -----------------------
-19_Dropbox_Vulnerability
+## 19_Dropbox_Vulnerability
 
 - Vulnerable in the content provider
 - Not exported, but a big mistake by the developer
@@ -923,7 +939,7 @@ Now go to original dropbox, the secret file is shown.
 Now if you go back to dropbox/public, the secret file is uploaded.
 
 -----------------------
-20_Backup_based_vulnerability
+## 20_Backup_based_vulnerability
 
 Android Backup Vuln
 
@@ -1011,7 +1027,7 @@ And if you look at settings, there will be no passcode set.
 Prevention : android:allowBackup= "false"
 ```
 -----------------------
-21_Client_Side_Injection
+## 21_Client_Side_Injection
 
 
 SQLite injection
@@ -1060,7 +1076,7 @@ User : Aditya1'or'1='1-
 Password : 12345
 ```
 -----------------------
-22_Hooking_Introduction_and_setting_up_InsecureBankSetup
+## 22_Hooking_Introduction_and_setting_up_InsecureBankSetup
 
 Android Hooking
 
@@ -1110,7 +1126,7 @@ adb logcat | grep 1212
 ```
 
 -----------------------
-23_Android-Debugging-with-Andbug
+## 23_Android-Debugging-with-Andbug
 
 Andbug
 
@@ -1157,7 +1173,7 @@ Note : Now whenever the dotransfer is executed, it will hook with the below disp
 Now if you try to do a transfer in genymotion, it will display the details in the andbug.
 
 -----------------------
-24_Debugging-with-JDB
+## 24_Debugging-with-JDB
 
 JDB
 
@@ -1240,7 +1256,7 @@ eval dotransfer("192.168.161.241","8080","12345","56788","1337")
 The mentioned amount in the port will be transfered.
 
 -----------------------
-25_Automated-Hooking-With-Introspy
+## 25_Automated-Hooking-With-Introspy
 
 Hooking using Introspy
 
@@ -1326,7 +1342,7 @@ firefox report.html
 Note : the html page will show all the arguments, return value etc.
 
 -----------------------
-26_Cydia_Substrate
+## 26_Cydia_Substrate
 
 How do you make changes permanent
 
@@ -1396,7 +1412,7 @@ Restart soft and then ok.
 Now if you enter any application. You will have the application unlocked.
 
 -----------------------
-27_Hooking-using-Xposed
+## 27_Hooking-using-Xposed
 
 XPosed Framework
 
@@ -1461,7 +1477,7 @@ Now bypass validation is activated.
 Now if you look at logcat, the wrong password will bind with the actual password.
 
 -----------------------
-28_Androguard-Scripting-and-Analysis
+## 28_Androguard-Scripting-and-Analysis
 
 Androguard 101
 
@@ -1530,7 +1546,7 @@ for t in d.get_classes():
 Note : We will be displayed with all classes.
 
 -----------------------
-29_Whats_a_webview
+## 29_Whats_a_webview
 
 - What's a webview?
 - Can you execute Javascript using Webview?
@@ -1582,7 +1598,7 @@ Now try adding script to the html page.
 It will show you the webview vulnerability.
 
 -----------------------
-30_Exploiting-webviews-with-metasploit
+## 30_Exploiting-webviews-with-metasploit
 
 Exploitation with Metasploit
 
