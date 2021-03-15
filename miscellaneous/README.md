@@ -1,6 +1,7 @@
 # Static Code assessment round interview questions
 
-## Idenfity and explain the Vulnerability 1 : Linux command/ Buffer Overflow/ Malware (10 points)
+## Idenfity and explain the Vulnerability 1 : Linux command/ Buffer Overflow/ Malware 
+### (10 points)
 
 ### Vulnerable Code :
 ```
@@ -37,7 +38,8 @@ The byte sequence F0 0F C7 C8 represents the instruction lock cmpxchg8b eax
  None. Users have already upgraded to latest Intel chips. 
  
 --------------------------------------------------
-## Idenfity and explain the Vulnerability 2 : DOM-XSS ( HTML ) (15 points)
+## Idenfity and explain the Vulnerability 2 : DOM-XSS ( HTML ) 
+### (15 points)
 
 ### Vulnerable Code :
 ```
@@ -77,7 +79,8 @@ Example sink : eval
 There is no single Remedy. However,the most effective way to avoid DOM-based vulnerabilities is to avoid allowing data from any untrusted source to dynamically alter the value that is transmitted to any sink.
 
 --------------------------------------------------
-## Idenfity and explain the Vulnerability 3 : CSRF ( Wordpress ) (25 points)
+## Idenfity and explain the Vulnerability 3 : CSRF ( Wordpress ) 
+### (25 points)
 
 ### Vulnerable Code :
 ```
@@ -154,11 +157,14 @@ There is no single Remedy. However,the most effective way to avoid DOM-based vul
 - Without this protection, an attacker could craft a malicious request to trick an administrator into infecting their own site.
 - Therefore, this vulnerability allows anybody to forge a request on behalf of an administrator and inject executable code on a vulnerable site. 
 
+Detailed explanation : https://blog.wpsec.com/csrf-to-rce-wordpress/
+
 ### Remediation: 
 Upgrade to the latest version of wordpress version.
 
 --------------------------------------------------
-## Idenfity and explain the Vulnerability 4 : Polymorphic Shellcode/ Buffer Overflow ( Assembly ) (50 points)
+## Idenfity and explain the Vulnerability 4 : Polymorphic Shellcode/ Buffer Overflow ( Assembly ) 
+### (50 points)
 
 ### Vulnerable Code :
 ```
