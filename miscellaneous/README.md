@@ -1,7 +1,43 @@
 # Static Code assessment round interview questions
 
+## Idenfity and explain the Vulnerability 1 : Buffer Overflow/ Malware (10 points)
+
+### Vulnerable Code :
+```
+char x [5] = { 0xf0, 0x0f, 0xc7, 0xc8 };
+
+main ()
+{
+       void (*f)() = x;
+       f();
+}
+```
+
+### Explanation :
+Intel "f00f" Pentium bug : 
+
+If you execute F0 0F C7 C8 on a P5 it will lock the machine up. This is true for any operating system including usermode Linux.
+When run in *user* mode locks up pentium processors solid. 
+
+99% of these writes were marking a space that was already marked. When you get up to walking by large strides most of those were already covered by one of the smaller factors.
+
+So if you changed the code from:
+
+     array[N] = 1
+to:
+     if (!array[N]) array[N] = 1
+
+Now suddenly we are doing a read first, and after that read we skip the write so the data in the cache doesn't become modified and can be discarded in the future.
+
+The byte sequence F0 0F C7 C8 represents the instruction lock cmpxchg8b eax
+ 
+ Detailed review : https://en.wikipedia.org/wiki/Pentium_F00F_bug
+ 
+ ### Remediation :
+ None. Users have already upgraded to latest Intel chips. 
+ 
 --------------------------------------------------
-## Idenfity and explain the Vulnerability 1 : DOM-XSS ( HTML ) (10 points)
+## Idenfity and explain the Vulnerability 2 : DOM-XSS ( HTML ) (15 points)
 
 ### Vulnerable Code :
 ```
@@ -41,7 +77,7 @@ Example sink : eval
 There is no single Remedy. However,the most effective way to avoid DOM-based vulnerabilities is to avoid allowing data from any untrusted source to dynamically alter the value that is transmitted to any sink.
 
 --------------------------------------------------
-## Idenfity and explain the Vulnerability 2 : CSRF ( Wordpress ) (15 points)
+## Idenfity and explain the Vulnerability 3 : CSRF ( Wordpress ) (25 points)
 
 ### Vulnerable Code :
 ```
@@ -122,7 +158,7 @@ There is no single Remedy. However,the most effective way to avoid DOM-based vul
 Upgrade to the latest version of wordpress version.
 
 --------------------------------------------------
-## Idenfity and explain the Vulnerability 3 : Polymorphic Shellcode/ Buffer Overflow ( Assembly ) (25 points)
+## Idenfity and explain the Vulnerability 4 : Polymorphic Shellcode/ Buffer Overflow ( Assembly ) (50 points)
 
 ### Vulnerable Code :
 ```
