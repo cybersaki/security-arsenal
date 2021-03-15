@@ -163,7 +163,7 @@ Detailed explanation : https://blog.wpsec.com/csrf-to-rce-wordpress/
 Upgrade to the latest version of wordpress version.
 
 --------------------------------------------------
-## Idenfity and explain the Vulnerability 4 : Polymorphic Shellcode/ Buffer Overflow ( Assembly ) 
+## Idenfity and explain the Vulnerability 4 : Polymorphic Shellcode/ Buffer Overflow(Assembly) 
 ### (50 points)
 
 ### Vulnerable Code :
