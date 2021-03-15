@@ -22,11 +22,14 @@ When run in *user* mode locks up pentium processors solid.
 
 99% of these writes were marking a space that was already marked. When you get up to walking by large strides most of those were already covered by one of the smaller factors.
 
+```
 So if you changed the code from:
 
      array[N] = 1
 to:
+
      if (!array[N]) array[N] = 1
+````
 
 Now suddenly we are doing a read first, and after that read we skip the write so the data in the cache doesn't become modified and can be discarded in the future.
 
