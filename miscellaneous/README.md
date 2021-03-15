@@ -1,6 +1,6 @@
 # Static Code assessment round interview questions
 
-## Idenfity and explain the Vulnerability 1 : Buffer Overflow/ Malware (10 points)
+## Idenfity and explain the Vulnerability 1 : Linux command/ Buffer Overflow/ Malware (10 points)
 
 ### Vulnerable Code :
 ```
