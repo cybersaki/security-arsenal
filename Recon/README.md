@@ -21,16 +21,9 @@ python subbrute.py google.com
 ```
 amass -d target.com
 ```
-Censys
 
-Shodan : Reference materials : https://leanpub.com/shodan
-
-### Github dorks :
-```
-API_key and AWS_Secret
-"password" "dev"
-api endpoints
-```
+### Shodan : 
+Reference materials : https://leanpub.com/shodan
 
 ### Amazon web services :
 ```
@@ -169,15 +162,30 @@ https://digi.ninja/projects/bucket_finder.php
 ### Lazys3 :
 https://github.com/nahamsec/lazys3
 
-### Slurp for aws :
-https://github.com/bbb31/slurp
-
-### s3 bucket finder :
-https://github.com/gwen001/s3-buckets-finder
-
 ### Github dorking :
+```
+API_key and AWS_Secret
+"password" "dev"
+api endpoints
+```
 https://edoverflow.com//2017/github-for-bugbountyhunters
 https://github.com/techgaun/github-dorks
+
+#### Code repos for recon in github:
+```
+".delloite.com"+"password"
+
+"delete the private ssh"
+
+"SQL injection vuln in data.views"
+
+"Multiple XSS vulnerabilities"
+```
+
+#### Mass cloning on github : 
+```
+https://github.com/mazen160/GithubCloner
+```
 
 ### Linkfinder for JS :
 https://github.com/GerbenJavado/LinkFinder
@@ -243,22 +251,6 @@ python3 spaces_finder.py -l sample_spaces.txt -g interesting_keywords.txt -D -m 
 https://danielmiessler.com/blog/apis-2fas-achilles-heel/
 ```
 
-### Code repos for recon in github:
-```
-".delloite.com"+"password"
-
-"delete the private ssh"
-
-"SQL injection vuln in data.views"
-
-"Multiple XSS vulnerabilities"
-```
-
-### Mass cloning on github : 
-```
-https://github.com/mazen160/GithubCloner
-```
-
 ### Static code analysis :
 #### Brakeman for Ruby :
 https://brakemanscanner.org/
@@ -303,7 +295,7 @@ meg -s 200 \
   out-php/ 2> /dev/null
 ```
 
-### Android apps recon :
+## Android apps recon :
 Get the file from https://apkpure.com/ or  /data/app/[PACKAGE NAME]/base.apk
 
 Check if packet capture shows any weird data
@@ -355,6 +347,8 @@ cat 2018-04-21-1524297601-fdns_any.json.gz | pigz -dc | grep "\.example\.com" | 
 ```
 https://opendata.rapid7.com/about/
 
+------------------------------------------------------------------------------------------------------------------------
+## AWS recon :
 ### Conduct reconnaissance using opendata7 and aws :
 ```
 aws s3 ls s3://rapid7-opendata/ --no-sign-request
@@ -374,8 +368,15 @@ aws s3 ls s3://hackerone-attachment
 aws s3 mv test.txt s3://hackerone-attachments
 ```
 
-### Google dorks :
-#### Google dorks for sensitive files and urls
+### Slurp for aws :
+https://github.com/bbb31/slurp
+
+### s3 bucket finder :
+https://github.com/gwen001/s3-buckets-finder
+
+------------------------------------------------------------------------------------------------------------------------
+## Google dorking :
+### Google dorks for sensitive files and urls
 ```
 site:google.com
 site:google.com -www -cloud
@@ -405,12 +406,12 @@ intext
 ```
 Check for ftp and smtp credentials.
 
-#### Google dorks for s3 buckets:
+### Google dorks for s3 buckets:
 ```
 site:s3.amazonaws.com file:pdf
 site:s3.amazonaws.com password
 ```
-
+------------------------------------------------------------------------------------------------------------------------
 ### Nuclei project
 ```
 nuclei -l test.txt -t ../nuclei-templates/ -o output.txt
