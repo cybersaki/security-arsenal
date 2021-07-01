@@ -1,4 +1,4 @@
-# Under construction
+# Recon cheatsheet for pentesting and bugbounty
 
 ## 1) Subdomain enumeration:
 ### 1.1 )Sublist3r
@@ -278,6 +278,16 @@ meg -s 200 \
   out-php/ 2> /dev/null
 ```
 
+### 3.7) Nmap - Sensitive ports opened
+```
+nmap -sV -sC -sS -Pn -p 1-65535 -vvv -O -A <host> 
+```
+
+### 3.8) Nikto - Banner and version disclosure 
+```
+Nikto -h <url>
+```
+
 ------------------------------------------------------------------------------------------------------------------------
 
 ## 4) Recon using Static code analysis :
@@ -450,3 +460,12 @@ https://github.com/mazen160/GithubCloner
 nuclei -l test.txt -t ../nuclei-templates/ -o output.txt
 ```
 Note : Buy a VPS and run Nuclei.
+
+------------------------------------------------------------------------------------------------------------------------
+## 10) Webscreenshot for easy check on the URLS :
+From the previous methods, collect all urls, directories and files into a spreadsheet separately and delete duplicates.
+
+Export the spreadsheets into text files and use it for webscreenshot to display tons of websites easily in a single index page.
+```
+python webscreenshot.py -i ~/recondata/yahoo.com/alive.txt -o home/yahoo.com/screenshots -w 20 -m -a "X-FORWARDED-FOR: 127.0.0.1"
+```
