@@ -207,7 +207,9 @@ gobuster -m dns -u $TARGET.com -t 100 -w all.txt
 ------------------------------------------------------------------------------------------------------------------------
 ## 3) Endpoint recon : 
 ### 3.1) waffinder:
-wafwoof (url>
+```
+wafwoof (url)
+```
 
 To bypass waf, we need original IP:
 ```
