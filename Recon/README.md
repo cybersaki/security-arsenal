@@ -1,50 +1,50 @@
 # Under construction
 
-## Subdomain enumeration:
-### Sublist3r
+## 1) Subdomain enumeration:
+### 1.1 )Sublist3r
 ```
 python sublist3r.py -d yahoo.com
 ```
 
-### subbrute:
+### 1.3) subbrute:
 ```
 python subbrute.py google.com
 ```
 
-### subfinder:
+### 1.4) subfinder:
 ```
 ./subfinder -d target.com
 ./subfinder -d target.com -b -w all.txt
 ```
 
-### Amass:
+### 1.5) Amass:
 ```
 amass -d target.com
 ```
 
-### Shodan : 
-#### Reference materials : 
+### 1.6) Shodan : 
+#### 1.6.1) Reference materials : 
 https://leanpub.com/shodan
 
-#### Shodan dorks:
+#### 1.6.2) Shodan dorks:
 ```
 net:64.233.160.0/19
 org:"Google"
 ```
 
-### Censys dorks:
+### 1.7) Censys dorks:
 ```
 ip:64:233.160.0/19
 autonomous_system.asn:15169
 autonomous_system.organization:"Google Inc."
 ```
 
-### Amazon web services :
+### 1.8) Amazon web services :
 ```
 site:s3.amazonaws.com + abc.com
 ```
 
-### Aquatone :
+### 1.9) Aquatone :
 ```
 ~/aquatone/tesla.com
 ❯ grep -c -E ',(CNAME|A|AAAA),' *.csv
@@ -56,13 +56,13 @@ site:s3.amazonaws.com + abc.com
 subdomaintakeovers : ~/aquatone/tesla.com aquatone-takeover --list-detectors | grep -Fc Service.
 ```
 
-### assetfinder:
+### 1.10) assetfinder:
 ```
 assetfinder -subs-only ppf.sony.net | httprobe
 ```
 
-### Whois and massdns:
-#### Whois :
+### 1.11) Whois and massdns:
+#### 1.11.1) Whois :
 whois search for an emal,
 Now reverse whois search for websites registered in the email.
 ```
@@ -72,7 +72,7 @@ whois domain.com
 massdns -r lists/resolvers.txt -t -A -q -O -S domains.txt
 ```
 
-#### Massdns :
+#### 1.11.2) Massdns :
 ```
 ./subbrute.py /root/work/bin/all.txt $TARGET.com | ./bin/massdns -r resolvers.txt -t A -a -o -w massdns_output.txt
 
@@ -81,26 +81,26 @@ massdns -r lists/resolvers.txt -t -A -q -O -S domains.txt
 All.txt = https://gist.githubusercontent.com/jhaddix/86a06c5dc309d08580a018c66354a056/raw/f58e82c9abfa46a932eb92edbe6b18214141439b/all.txt
 ```
 
-### domlink:
+### 1.13) domlink:
 https://github.com/vysec/DomLink
 
-### masscan :
+### 1.14) masscan :
 ```
 masscan -p1-65535 -iL $TARGET_LIST --max-rate 100000 -oG $TARGET_OUTPUT
 ```
 
-### IP Address:
+### 1.15) IP Address:
 ```
 dig a eff.org +short
 >69.50.232.53
 ```
 
-### Knockpy:
+### 1.16) Knockpy:
 ```
 Knockpy <url>
 ```
 
-### Subresolve:
+### 1.17) Subresolve:
 ```
 ruby resolve.rb domainlist
 
@@ -111,102 +111,102 @@ ruby recon.rb gist
 ((https://gist.github.com/ehsahil/f0f6e731a22a111399aa8503e34b6919))
 ```
 
-### Lazyrecon:
+### 1.18) Lazyrecon:
 ```
 lazyrecon <url>
 ```
 
-### Lazyshot:
+### 1.19) Lazyshot:
 ```
 python lazyshot.py wordlist
 ```
 
-### IP range crawl:
+### 1.20) IP range crawl:
 ```
 bgp.he.net/dns/
 ```
 
-### Altdns:
+### 1.21) Altdns:
 ```
 ./altdns.py -i subdomains.txt -o data_output -w words.txt -r -s output.txt
 ```
-### Domains from csp :
+### 1.22) Domains from csp :
 https://github.com/yamakira/domains-from-csp
 
-### Analyse your HTTP response headers :
+### 1.23) Analyse your HTTP response headers :
 https://securityheaders.com/
 
-### More targets with burpsuite by Jason Haddix :
+### 1.24) More targets with burpsuite by Jason Haddix :
 https://medium.com/u/1dfc5adea2d4?source=post_page-----82b7e5f62e21--------------------------------
 
-### Domain Analyzer :
+### 1.25) Domain Analyzer :
 https://github.com/eldraco/domain_analyzer
 
-### Domain profiler :
+### 1.26) Domain profiler :
 https://github.com/jpf/domain-profiler
 
-### VHost Scan :
+### 1.27) VHost Scan :
 https://github.com/codingo/VHostScan
 
-### Threat crowd :
+### 1.28) Threat crowd :
 https://www.threatcrowd.org/
 
-### Visual site mapper :
+### 1.29) Visual site mapper :
 http://www.visualsitemapper.com/
 
-### Google transparency report :
+### 1.30) Google transparency report :
 https://transparencyreport.google.com/https/certificates
 
-### Certspotter:
+### 1.31) Certspotter:
 https://certspotter.com/api/v0/certs?domain=domain.com
 
-### Certdb:
+### 1.32) Certdb:
 https://certdb.com/
 
-### crtsh:
+### 1.33) crtsh:
 https://crt.sh/?q=%25domain.com
 
-### Facebook certificate transparency monitoring systems :
+### 1.34) Facebook certificate transparency monitoring systems :
 https://developers.facebook.com/tools/ct
 
-### Bucket finder - Digininja :
+### 1.35) Bucket finder - Digininja :
 https://digi.ninja/projects/bucket_finder.php
 
-### Lazys3 :
+### 1.36) Lazys3 :
 https://github.com/nahamsec/lazys3
 
-### Virustotal:
+### 1.37) Virustotal:
 ```
 python virustotal_subdomain_enum.py <host> 20
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
-## Directory and file recon :
-### Dirsearch:
+## 2) Directory and file recon :
+### 2.1) Dirsearch:
 ```
 dirsearch.py -u target.com -e html,json,php -x 403,500 -t 50
 ```
 
-### Linkfinder for JS :
+### 2.2) Linkfinder for JS :
 https://github.com/GerbenJavado/LinkFinder
 
-### jsparser :
+### 2.3) jsparser :
 https://github.com/nahamsec/JSParser
 
-### JS tricks :
+### 2.4) JS tricks :
 https://medium.com/bugbountywriteup/bug-bounty-tips-tricks-js-javascript-files-bdde412ea49d
 
-### waybackurl :
+### 2.5) waybackurl :
 https://gist.github.com/mhmdiaa/adf6bff70142e5091792841d4b372050
 
-### Gobuster:
+### 2.6) Gobuster:
 ```
 gobuster -m dns -u $TARGET.com -t 100 -w all.txt
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
-## Endpoint finders : 
-### waffinder:
+## 3) Endpoint finders : 
+### 3.1) waffinder:
 wafwoof (url>
 
 To bypass waf, we need original IP:
@@ -221,47 +221,47 @@ Once you got several ips, you can test with simple curl command :
 curl --silent --fail -H "Host: www.test.com" http://$IP_YOU_HAVE_FOUND
 ```
 
-### Spaces finder:
+### 3.2) Spaces finder:
 ```
 https://github.com/appsecco/spaces-finder
 python3 spaces_finder.py -l sample_spaces.txt -g interesting_keywords.txt -D -m 500000 -t 2
 ```
 
-### Blog for api keys :
+### 3.3) Blog for api keys :
 ```
 https://danielmiessler.com/blog/apis-2fas-achilles-heel/
 ```
 
-### API recon using kiterunner : 
+### 3.4) API recon using kiterunner : 
 ```
 kr scan url -w /home/kali/folder/routes-large.kite -o json (or -o text)
 
 kr brute url -A=apiroutes-210228
 ```
-#### For many urls :
+#### 3.4.1) For many urls :
 ```
 kr scan source.txt -w /home/kali/folder/routes-large.kite
 ```
 
-#### Combining :
+#### 3.4.2) Combining :
 ```
 kr scan url -w /home/kali/folder/routes-large.kite -A=apiroutes-210228
 ```
 
-#### Replay a request:
+#### 3.4.3) Replay a request:
 ```
 kr kb replay -w /home/kali/folder/routes-large.kite "GET 404 [6282,282,282] url 0029ab68cd009ffee"
 ```
 
-#### Sending to burp :
+#### 3.4.4) Sending to burp :
 --proxy=http://127.0.0.1:8080
 
-#### Filter out status code requests:
+#### 3.4.5) Filter out status code requests:
 ```
 kr scan url -w /home/kali/folder/routes-large.kite -A=apiroutes-210228 --fail-status-codes 400,401,404,403,501,502,426,411
 ```
 
-### meg:
+### 3.5) meg:
 ```
 meg <endpoint> <host>
 meg / https://edoverflow.com
@@ -271,7 +271,7 @@ sed 's#^#http://#g' list-of-hosts > output
 meg / https://edoverflow.com out-edoverflow/
 ```
 
-### Discover interesting files on web :
+### 3.6) Discover interesting files on web :
 ```
 meg -s 200 \
   lists/php targets-all \
@@ -280,15 +280,15 @@ meg -s 200 \
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### Recon using Static code analysis :
-#### Brakeman for Ruby :
+## 4) Recon using Static code analysis :
+### 4.1) Brakeman for Ruby :
 https://brakemanscanner.org/
 
-#### Bandit for python:
+### 4.2) Bandit for python:
 https://github.com/openstack/bandit
 
 ------------------------------------------------------------------------------------------------------------------------
-## Android apps recon :
+## 5) Android apps recon :
 Get the file from https://apkpure.com/ or  /data/app/[PACKAGE NAME]/base.apk
 
 Check if packet capture shows any weird data
@@ -297,13 +297,13 @@ If you see empty data to port 443, then SSL pinning is possible.
 If the app is not making any connection to server or burp isnt catching any response,
 either its ssl pinning or non-http traffic.
 
-#### SSL Trustkiller : 
+### 5.1) SSL Trustkiller : 
 https://github.com/iSECPartners/Android-SSL-TrustKiller
 
-#### SSL unpinning :
+### 5.2) SSL unpinning :
 https://github.com/ac-pm/SSLUnpinning_Xposed
 
-#### Bypassing ssl pinning :
+### 5.3) Bypassing ssl pinning :
 https://blog.it-securityguard.com/the-stony-path-of-android-%F0%9F%A4%96-bug-bounty-bypassing-certificate-pinning/
 
 Decompile app using apktool and dex2jar
@@ -316,53 +316,53 @@ grep -hnrE "\.json" /Users/kali/smali/
 ```
 Use linkfinder to find all urls in the smali code.
 
-#### oneliner bash to decompile and linkfinder :
+### 5.4) oneliner bash to decompile and linkfinder :
 ```
 apktool d app.apk; cd app;mkdir collection; find . -name \*.smali -exec sh -c 'cp "$1" collection/$(head /dev/urandom | md5 | cut -d" " -f1).smali' _ {} \;; linkfinder.py -i 'collection/*.smali' -o cli
 ```
 
-To narrow this down, use regex option(-r) :
+### 5.5) To narrow this down, use regex option(-r) :
 ```
 linkfinder.py -i 'collection/*.smali' -o cli -r '\.json'
 ```
 Check the /assets and /res/raw
 
-#### Check for recon tricks :
+### 5.6) Check for recon tricks :
 https://www.youtube.com/watch?v=OLgmPxTHLuY
 
 Look in smali and dex code for invoke-static and iget-object for leaking phone numbers and sms.
 verify_phone.json
 
 ------------------------------------------------------------------------------------------------------------------------
-## AWS recon :
-### Conduct reconnaissance using opendata7 and aws :
+## 6) AWS recon :
+### 6.1) Conduct reconnaissance using opendata7 and aws :
 ```
 aws s3 ls s3://rapid7-opendata/ --no-sign-request
 ```
 https://www.rapid7.com/blog/post/2018/10/16/how-to-conduct-dns-reconnaissance-for-02-using-rapid7-open-data-and-aws/
 
-### Bucketfinder :
+### 6.2) Bucketfinder :
 ```
 https://digi.ninja/projects/bucket_finder.php
 ./bucket_finder.rb url
 ```
 
-#### Awscli :
+### 6.3) Awscli :
 ```
 aws s3 ls s3://hackerone-attachment
 
 aws s3 mv test.txt s3://hackerone-attachments
 ```
 
-### Slurp for aws :
+### 6.4) Slurp for aws :
 https://github.com/bbb31/slurp
 
-### s3 bucket finder :
+### 6.5) s3 bucket finder :
 https://github.com/gwen001/s3-buckets-finder
 
 ------------------------------------------------------------------------------------------------------------------------
-## Google dorking :
-### Google dorks for sensitive files and urls
+## 7) Google dorking :
+### 7.1) Google dorks for sensitive files and urls
 ```
 site:google.com
 site:google.com -www -cloud
@@ -392,34 +392,34 @@ intext
 ```
 Check for ftp and smtp credentials.
 
-### Google dorks for s3 buckets:
+### 7.2) Google dorks for s3 buckets:
 ```
 site:s3.amazonaws.com file:pdf
 site:s3.amazonaws.com password
 ```
 ------------------------------------------------------------------------------------------------------------------------
-## Github dorking :
-#### Find secrets in code : 
+## 8) Github dorking :
+### 8.1) Find secrets in code : 
 - API and key. (Get some more endpoints and find API keys.)
 - token
 - secret
 - vulnerable
 - http://
 
-#### Find juicy information in source code :
+### 8.2) Find juicy information in source code :
 https://github.com/dxa4481/truffleHog : 
 ```
 truffleHog --regex --entropy=False https://github.com/dxa4481/truffleHog.git
 ```
 https://github.com/anshumanbh/git-all-secrets
 
-### Collection of github dorks :
+### 8.3) Collection of github dorks :
 https://github.com/techgaun/github-dorks/blob/master/github-dorks.txt
 
-### Tool to run github dorks against a repo : 
+### 8.4) Tool to run github dorks against a repo : 
 https://github.com/techgaun/github-dorks
 
-Check for special key words :
+### 8.5) Check for special key words :
 ```
 API_key and AWS_Secret
 "password" "dev"
@@ -428,7 +428,7 @@ api endpoints
 https://edoverflow.com//2017/github-for-bugbountyhunters
 https://github.com/techgaun/github-dorks
 
-### Code repos for recon in github:
+### 8.6) Code repos for recon in github:
 ```
 ".delloite.com"+"password"
 
@@ -439,13 +439,14 @@ https://github.com/techgaun/github-dorks
 "Multiple XSS vulnerabilities"
 ```
 
-### Mass cloning on github : 
+### 8.7) Mass cloning on github : 
 ```
 https://github.com/mazen160/GithubCloner
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
-### Nuclei project for all rounder :
+## 9) Nuclei project for all rounder :
 ```
 nuclei -l test.txt -t ../nuclei-templates/ -o output.txt
 ```
+Note : Buy a VPS and run Nuclei.
