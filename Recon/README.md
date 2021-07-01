@@ -205,7 +205,7 @@ gobuster -m dns -u $TARGET.com -t 100 -w all.txt
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
-## 3) Endpoint finders : 
+## 3) Endpoint recon : 
 ### 3.1) waffinder:
 wafwoof (url>
 
@@ -287,6 +287,22 @@ nmap -sV -sC -sS -Pn -p 1-65535 -vvv -O -A <host>
 ```
 Nikto -h <url>
 ```
+
+### 3.9) Certificate checks :
+P.S : Check Shodan of the site first to confirm the certificate transparency 
+
+#### 3.10) Openssl :
+```
+openssl s_client -connect example.com:443
+```
+
+#### 3.11) sslscan :
+```
+sslscan (url)
+```
+
+#### 3.12) Advanced REST client:
+Run from GUI to receive the additional headers and certificate transparency associated with the endpoint.
 
 ------------------------------------------------------------------------------------------------------------------------
 
