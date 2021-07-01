@@ -23,7 +23,21 @@ amass -d target.com
 ```
 
 ### Shodan : 
-Reference materials : https://leanpub.com/shodan
+#### Reference materials : 
+https://leanpub.com/shodan
+
+#### Shodan dorks:
+```
+net:64.233.160.0/19
+org:"Google"
+```
+
+### Censys dorks:
+```
+ip:64:233.160.0/19
+autonomous_system.asn:15169
+autonomous_system.organization:"Google Inc."
+```
 
 ### Amazon web services :
 ```
@@ -42,17 +56,13 @@ site:s3.amazonaws.com + abc.com
 subdomaintakeovers : ~/aquatone/tesla.com aquatone-takeover --list-detectors | grep -Fc Service.
 ```
 
-### Dirsearch:
-```
-dirsearch.py -u target.com -e html,json,php -x 403,500 -t 50
-```
-
 ### assetfinder:
 ```
 assetfinder -subs-only ppf.sony.net | httprobe
 ```
 
 ### Whois and massdns:
+#### Whois :
 whois search for an emal,
 Now reverse whois search for websites registered in the email.
 ```
@@ -62,23 +72,27 @@ whois domain.com
 massdns -r lists/resolvers.txt -t -A -q -O -S domains.txt
 ```
 
+#### Massdns :
+```
+./subbrute.py /root/work/bin/all.txt $TARGET.com | ./bin/massdns -r resolvers.txt -t A -a -o -w massdns_output.txt
+
+./scripts/ct.py example.com | ./bin/massdns -r lists/resolvers.txt -t A -o S -w results.txt
+
+All.txt = https://gist.githubusercontent.com/jhaddix/86a06c5dc309d08580a018c66354a056/raw/f58e82c9abfa46a932eb92edbe6b18214141439b/all.txt
+```
+
+### domlink:
+https://github.com/vysec/DomLink
+
+### masscan :
+```
+masscan -p1-65535 -iL $TARGET_LIST --max-rate 100000 -oG $TARGET_OUTPUT
+```
+
 ### IP Address:
 ```
 dig a eff.org +short
 >69.50.232.53
-```
-
-### Shodan dorks:
-```
-net:64.233.160.0/19
-org:"Google"
-```
-
-### Censys dorks:
-```
-ip:64:233.160.0/19
-autonomous_system.asn:15169
-autonomous_system.organization:"Google Inc."
 ```
 
 ### Knockpy:
@@ -116,7 +130,6 @@ bgp.he.net/dns/
 ```
 ./altdns.py -i subdomains.txt -o data_output -w words.txt -r -s output.txt
 ```
-
 ### Domains from csp :
 https://github.com/yamakira/domains-from-csp
 
@@ -162,29 +175,16 @@ https://digi.ninja/projects/bucket_finder.php
 ### Lazys3 :
 https://github.com/nahamsec/lazys3
 
-### Github dorking :
+### Virustotal:
 ```
-API_key and AWS_Secret
-"password" "dev"
-api endpoints
-```
-https://edoverflow.com//2017/github-for-bugbountyhunters
-https://github.com/techgaun/github-dorks
-
-#### Code repos for recon in github:
-```
-".delloite.com"+"password"
-
-"delete the private ssh"
-
-"SQL injection vuln in data.views"
-
-"Multiple XSS vulnerabilities"
+python virustotal_subdomain_enum.py <host> 20
 ```
 
-#### Mass cloning on github : 
+------------------------------------------------------------------------------------------------------------------------
+## Directory and file recon :
+### Dirsearch:
 ```
-https://github.com/mazen160/GithubCloner
+dirsearch.py -u target.com -e html,json,php -x 403,500 -t 50
 ```
 
 ### Linkfinder for JS :
@@ -204,23 +204,8 @@ https://gist.github.com/mhmdiaa/adf6bff70142e5091792841d4b372050
 gobuster -m dns -u $TARGET.com -t 100 -w all.txt
 ```
 
-### Massdns :
-```
-./subbrute.py /root/work/bin/all.txt $TARGET.com | ./bin/massdns -r resolvers.txt -t A -a -o -w massdns_output.txt
-
-./scripts/ct.py example.com | ./bin/massdns -r lists/resolvers.txt -t A -o S -w results.txt
-
-All.txt = https://gist.githubusercontent.com/jhaddix/86a06c5dc309d08580a018c66354a056/raw/f58e82c9abfa46a932eb92edbe6b18214141439b/all.txt
-```
-
-### domlink:
-https://github.com/vysec/DomLink
-
-### masscan :
-```
-masscan -p1-65535 -iL $TARGET_LIST --max-rate 100000 -oG $TARGET_OUTPUT
-```
-
+------------------------------------------------------------------------------------------------------------------------
+## Endpoint finders : 
 ### waffinder:
 wafwoof (url>
 
@@ -235,10 +220,6 @@ Once you got several ips, you can test with simple curl command :
 ```
 curl --silent --fail -H "Host: www.test.com" http://$IP_YOU_HAVE_FOUND
 ```
-### Virustotal:
-```
-python virustotal_subdomain_enum.py <host> 20
-```
 
 ### Spaces finder:
 ```
@@ -251,32 +232,34 @@ python3 spaces_finder.py -l sample_spaces.txt -g interesting_keywords.txt -D -m 
 https://danielmiessler.com/blog/apis-2fas-achilles-heel/
 ```
 
-### Static code analysis :
-#### Brakeman for Ruby :
-https://brakemanscanner.org/
-
-#### Bandit for python:
-https://github.com/openstack/bandit
-
-#### Find secrets in code : 
-- API and key. (Get some more endpoints and find API keys.)
-- token
-- secret
-- vulnerable
-- http://
-
-#### Find juicy information in source code :
-https://github.com/dxa4481/truffleHog : 
+### API recon using kiterunner : 
 ```
-truffleHog --regex --entropy=False https://github.com/dxa4481/truffleHog.git
+kr scan url -w /home/kali/folder/routes-large.kite -o json (or -o text)
+
+kr brute url -A=apiroutes-210228
 ```
-https://github.com/anshumanbh/git-all-secrets
+#### For many urls :
+```
+kr scan source.txt -w /home/kali/folder/routes-large.kite
+```
 
-### Collection of github dorks :
-https://github.com/techgaun/github-dorks/blob/master/github-dorks.txt
+#### Combining :
+```
+kr scan url -w /home/kali/folder/routes-large.kite -A=apiroutes-210228
+```
 
-### Tool to run github dorks against a repo : 
-https://github.com/techgaun/github-dorks
+#### Replay a request:
+```
+kr kb replay -w /home/kali/folder/routes-large.kite "GET 404 [6282,282,282] url 0029ab68cd009ffee"
+```
+
+#### Sending to burp :
+--proxy=http://127.0.0.1:8080
+
+#### Filter out status code requests:
+```
+kr scan url -w /home/kali/folder/routes-large.kite -A=apiroutes-210228 --fail-status-codes 400,401,404,403,501,502,426,411
+```
 
 ### meg:
 ```
@@ -295,6 +278,16 @@ meg -s 200 \
   out-php/ 2> /dev/null
 ```
 
+------------------------------------------------------------------------------------------------------------------------
+
+### Recon using Static code analysis :
+#### Brakeman for Ruby :
+https://brakemanscanner.org/
+
+#### Bandit for python:
+https://github.com/openstack/bandit
+
+------------------------------------------------------------------------------------------------------------------------
 ## Android apps recon :
 Get the file from https://apkpure.com/ or  /data/app/[PACKAGE NAME]/base.apk
 
@@ -339,13 +332,6 @@ https://www.youtube.com/watch?v=OLgmPxTHLuY
 
 Look in smali and dex code for invoke-static and iget-object for leaking phone numbers and sms.
 verify_phone.json
-
-### Hunting subdomain in FDNS dataset : 
-```
-curl --silent -L https://opendata.rapid7.com/sonar.fdns_v2/2018-04-21-1524297601-fdns_any.json.gz | pigz -dc | head -n 10 | jq .
-cat 2018-04-21-1524297601-fdns_any.json.gz | pigz -dc | grep "\.example\.com" | jq .name
-```
-https://opendata.rapid7.com/about/
 
 ------------------------------------------------------------------------------------------------------------------------
 ## AWS recon :
@@ -412,7 +398,54 @@ site:s3.amazonaws.com file:pdf
 site:s3.amazonaws.com password
 ```
 ------------------------------------------------------------------------------------------------------------------------
-### Nuclei project
+## Github dorking :
+#### Find secrets in code : 
+- API and key. (Get some more endpoints and find API keys.)
+- token
+- secret
+- vulnerable
+- http://
+
+#### Find juicy information in source code :
+https://github.com/dxa4481/truffleHog : 
+```
+truffleHog --regex --entropy=False https://github.com/dxa4481/truffleHog.git
+```
+https://github.com/anshumanbh/git-all-secrets
+
+### Collection of github dorks :
+https://github.com/techgaun/github-dorks/blob/master/github-dorks.txt
+
+### Tool to run github dorks against a repo : 
+https://github.com/techgaun/github-dorks
+
+Check for special key words :
+```
+API_key and AWS_Secret
+"password" "dev"
+api endpoints
+```
+https://edoverflow.com//2017/github-for-bugbountyhunters
+https://github.com/techgaun/github-dorks
+
+### Code repos for recon in github:
+```
+".delloite.com"+"password"
+
+"delete the private ssh"
+
+"SQL injection vuln in data.views"
+
+"Multiple XSS vulnerabilities"
+```
+
+### Mass cloning on github : 
+```
+https://github.com/mazen160/GithubCloner
+```
+
+------------------------------------------------------------------------------------------------------------------------
+### Nuclei project for all rounder :
 ```
 nuclei -l test.txt -t ../nuclei-templates/ -o output.txt
 ```
