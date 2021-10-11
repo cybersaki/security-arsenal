@@ -7,13 +7,24 @@ Content :
 4) Security Tools for analysis/Vulnerability assessment
 5) Security Best practices
 
--------------------------------------------------------------------------
+
+-----------------------------
+
 
 # Docker basic commands :
 
-Please refer to the docker "basic-commands.txt" file.
+Please refer to the docker following files for docker basics :
 
--------------------------------------------------------------------------
+1) managing-containers.txt
+2) Process-management.txt
+3) podman-commands.txt
+4) containers-using-runc.txt
+5) multicontainer-setup.txt
+6) cgroup.txt
+7) PID_network_namespace.txt
+
+
+-----------------------------
 
 # Docker deployment tools :
 
@@ -24,7 +35,12 @@ https://www.portainer.io/
 https://github.com/francescou/docker-compose-ui
 https://github.com/tobegit3hub/seagull
 
--------------------------------------------------------------------------
+### Daemonless Open Containers Initiative :
+https://docs.podman.io/en/latest/
+
+
+-----------------------------
+
 
 # Docker Security Analysis :
 
@@ -35,7 +51,9 @@ https://github.com/buddy-works/dockerfile-linter/blob/master/Rules.md#EF0004
 
 Docker Registry HTTP API V2 : https://docs.docker.com/registry/spec/api/
 
--------------------------------------------------------------------------
+
+-----------------------------
+
 
 # Security Tools for analysis/Vulnerability assessment :
 
@@ -55,7 +73,9 @@ https://github.com/quay/clair
 ### Cloud native runtime security for monitoring : 
 https://github.com/falcosecurity/falco
 
--------------------------------------------------------------------------
+
+-----------------------------
+
 
 # Security Best practices :
 ### For writing a docker file :
