@@ -8,9 +8,6 @@ Content :
 5) Security Best practices
 
 
------------------------------
-
-
 # Docker basic commands :
 
 Please refer to the docker following files for docker basics :
@@ -23,8 +20,6 @@ Please refer to the docker following files for docker basics :
 6) cgroup.txt
 7) PID_network_namespace.txt
 
-
------------------------------
 
 # Docker deployment tools :
 
@@ -39,9 +34,6 @@ https://github.com/tobegit3hub/seagull
 https://docs.podman.io/en/latest/
 
 
------------------------------
-
-
 # Docker Security Analysis :
 
 ## Security Source code analysis rules :
@@ -50,9 +42,6 @@ https://github.com/buddy-works/dockerfile-linter/blob/master/Rules.md#EF0004
 ## API registry documentation :
 
 Docker Registry HTTP API V2 : https://docs.docker.com/registry/spec/api/
-
-
------------------------------
 
 
 # Security Tools for analysis/Vulnerability assessment :
@@ -72,9 +61,6 @@ https://github.com/quay/clair
 
 ### Cloud native runtime security for monitoring : 
 https://github.com/falcosecurity/falco
-
-
------------------------------
 
 
 # Security Best practices :
