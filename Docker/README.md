@@ -35,10 +35,10 @@ https://docs.podman.io/en/latest/
 
 # Docker Security Analysis :
 
-## Security Source code analysis rules :
+### Security Source code analysis rules :
 https://github.com/buddy-works/dockerfile-linter/blob/master/Rules.md#EF0004
 
-## API registry documentation :
+### API registry documentation :
 
 Docker Registry HTTP API V2 : https://docs.docker.com/registry/spec/api/
 
@@ -119,7 +119,7 @@ Command: docker push registry2:5000/alpine
 ```
 
 ### 2) User namespace remapping : 
-a) https://docs.docker.com/engine/security/userns-remap/
+a) https://docs.docker.com/engine/security/userns-remap/ <br />
 b) https://github.com/flast101/docker-privesc
 
 ### 3) Enabling authentication :
