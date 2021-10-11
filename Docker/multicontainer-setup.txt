@@ -1,0 +1,97 @@
+Multicontainer setups
+
+Step 1 : Pull the both docker images
+
+Command : docker pull registry:5000/appserver
+
+Command : docker pull registry:5000/memcached-app
+
+Step 2 : Check the locally present image list.
+
+Command : docker images
+
+Step 3 : Create a network named "test-net"
+
+Command : docker network create test-net
+
+Verify if the network is created
+
+Command : docker network ls
+
+Step 4: Run the appserver images first and attach test-net to it
+
+Command : docker run --network test-net -d registry:5000/appserver
+
+Now, similarly run the memcached image
+
+Command : docker run --network test-net -d registry:5000/memcached-app
+
+Step 5: Check the running containers
+
+Command : docker ps
+
+Step 6 : Check the IP address for the appserver container
+
+Command : docker insepct <containerid> | grep IP
+
+Step 7: Make a curl request on this IP to see if we can access the HTTP API for memcached
+
+Command : curl <IP>
+
+Step 8: Stop both containers
+
+Command : docker stop <container1> <container2>
+
+Also delete the test-net network
+
+Command : docker network rm test-net
+
+Docker Compose method
+
+Step 9: Create a docker-compose.yaml and describe this scenario
+
+docker-compose.yaml
+```
+version: "3.5"
+services:
+	appserver:
+		image: registry:5000/appserver
+		networks:
+			- backend
+	memcache:
+		image: registry:5000/memcached-app
+		networks:
+			- backend
+		depends_on:
+			- appserver
+	networks:
+		backend:
+			name: test-net2
+			driver: bridge
+```
+
+Step 9 : Use docker-compose to create the setup
+
+Command : docker-compose up
+
+Note : Make sure the docker-compose.yaml is present in the working directory..
+
+Step 10: Open another terminal(by clicking the lab link button again) check the IP address for the appserver container.
+
+Then, make a curl request on this IP to see if we can access the HTTP API for memcached
+
+Command : curl 172.20.0.2
+
+Step 11: Use the curl request to store an item to the memcached and retrieve it
+
+Store an term
+
+Command : curl "172.20.0.2/set?key=a&value=test"
+
+Retrieve that item
+
+Command : curl "172.20.0.2/get?key=a"
+
+Step 12 : Destroy the setup
+
+Command : docker-compose down
