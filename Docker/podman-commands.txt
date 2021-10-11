@@ -1,0 +1,150 @@
+Podman basics lab:
+
+1) Check podman version
+
+podman --version
+
+2) Check host information :
+
+podman info
+
+3) Pull image
+
+podman pull registry:5000/alpine
+
+4) List images
+
+podman images
+
+5) Run image in background mode
+
+podman run -dt registry:5000/alpine
+
+6) Run image in interactive mode
+
+podman run -it registry:5000/alpine sh
+
+7) List running containers:
+
+podman ps
+
+8) Inspect a container
+
+podman inspect <container id>
+
+9) Manage containers:
+
+podman container --help
+
+10) Manage images
+
+podman image --help
+
+11) List networks
+
+podman network ls
+
+12) Manage networks
+
+podman network --help
+
+13) Attach to a running container
+
+podman attach <container id>
+
+14) Execute a command in a running container
+
+podman exec -it <container id>
+
+15) Stop a running container
+
+podman stop <container id>
+
+16) Kill a running container
+
+podmain kill <container id>
+
+17) Build podman image
+
+Create a containerfile named containerfile.
+
+```
+FROM registry:5000/alpine:latest
+
+COPY script /root/
+
+RUN chmod +x /root/script
+```
+
+This containerfile takes locally present alpine image as base and copies a script in it.
+
+Create a dummy script named script
+```
+Dummy script
+```
+
+Command : podman build -t registry:5000/alpine-mod -f containerfile .
+
+19) Push the image
+
+podman push registry:5000/alpine-mod
+
+20) Commit container as an image
+
+Create a container by running an image. Make some changes to it
+
+podman run -it registry:5000/alpine sh
+
+/ # 
+/ # cd /root/
+~ # 
+~ # echo "We want to save this change" > note.txt
+~ # 
+~ # cat note.txt
+We want to save this change
+~ # 
+
+
+Here, a text file is created in it. Now, commit it.
+
+Command : podman commit <container id> registry:5000/alpine-note
+
+21) Export an image as tar archige
+
+podman ps
+
+podman export -o alpine.tar <image id>
+
+ls -l
+
+22) Remove stopped containers
+
+List all running and stopped containers
+
+podman ps -a
+
+Take container IDs of desired contaienrs and delete them
+
+podmain rm <containerid1> <containerid2> <containerid3> <etc>
+
+23) Remove an image
+
+List all images present in the local storage
+
+podman images
+
+Remove image by name
+
+command: podman rmi -f registry:5000/alpine-note
+
+Remove image by Image ID
+
+Command: podmain rmi -f <imageid>
+
+Check the image list to verify the deletion
+
+podman images
+
+24) Remove stopped container, unused images/networks
+
+podman system prune -a
