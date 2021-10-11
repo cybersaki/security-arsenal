@@ -11,13 +11,15 @@
 
 Please refer to the docker following files for docker basics :
 
-1.1) managing-containers.txt
-1.2) Process-management.txt
-1.3) podman-commands.txt
-1.4) containers-using-runc.txt
-1.5) multicontainer-setup.txt
-1.6) cgroup.txt
-1.7) PID_network_namespace.txt
+1.1) managing-containers.txt <br />
+1.2) Process-management.txt <br />
+1.3) podman-commands.txt <br />
+1.4) containers-using-runc.txt <br />
+1.5) multicontainer-setup.txt <br />
+1.6) cgroup.txt <br />
+1.7) PID_network_namespace.txt <br />
+
+
 
 
 # 2) Docker deployment tools :
@@ -33,6 +35,8 @@ https://github.com/tobegit3hub/seagull
 https://docs.podman.io/en/latest/
 
 
+
+
 # 3) Docker Security Analysis :
 
 ### 3.1) Security Source code analysis rules :
@@ -41,6 +45,8 @@ https://github.com/buddy-works/dockerfile-linter/blob/master/Rules.md#EF0004
 ### 3.2) API registry documentation :
 
 Docker Registry HTTP API V2 : https://docs.docker.com/registry/spec/api/
+
+
 
 
 # 4) Security Tools for analysis/Vulnerability assessment :
@@ -60,6 +66,8 @@ https://github.com/quay/clair
 
 ### 4.4) Cloud native runtime security for monitoring : 
 https://github.com/falcosecurity/falco
+
+
 
 
 # 5) Security Best practices :
