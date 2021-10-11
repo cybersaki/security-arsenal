@@ -1,0 +1,160 @@
+
+1) Check docker version :
+docker version
+
+2) Docker information :
+
+3) Docker registry pull command :
+docker info
+
+docker pull registry:5000/alpine
+
+4)List images
+docker images
+docker images ls
+
+5) Run image in background mode
+docker run -dt registry:5000/alpine
+
+6) Run image in interactive mode
+docker run -it registry:5000/alpine
+
+7) List running containers
+docker ps
+docker container ls
+
+8) Inspect a container
+docker inspect <container id>
+
+9) Manage containers
+docker container
+
+10) Manage images
+docker image
+
+11) List networks
+docker network ls
+
+12) Manage networks
+docker network
+
+13) Attach to a running container
+First type, 
+
+docker ps
+docker attach <container id>
+
+14) Execute a command in a running container
+docker exec -it <container id> /bin/sh
+
+15) Stop a running container
+docker stop <container id>
+
+16) Start a stopped container
+docker start <previous container id>
+
+17) Kill a running container
+docker kill <container id>
+
+18) Build docker image
+
+Create a file named "Dockerfile"
+
+```
+FROM registry:5000/alpine
+
+COPY script /root/
+
+RUN chmod +x /root/script
+```
+
+Create a dummy script named script
+
+```
+Dummy script
+```
+
+Final Command : "docker build -t reigstry:5000/alpine-mod ."
+
+19) Push the image
+
+docker push registry:5000/alpine-mod
+
+20) Commit container as an image
+
+Create a container image by running an image. Make some changes to it.
+
+docker run -it registry:5000/alpine sh
+
+```
+/ # 
+/ # cd /root
+~ # echo "Want to save ths change" > note.txt
+~ # 
+~ # cat note.txt
+Want to save ths change
+~ # 
+~ # 
+```
+
+Now type, docker ps
+
+Then, Command : docker commit <container id> registry:5000/alpine-note
+
+21) Export an iamge as tar archive
+
+Command: docker export -o alpine.tar <containerid>
+
+22) Remove stopped containers
+
+List all running and stopped containers
+
+docker ps -a
+
+Take container IDs of desired containers and delete them
+
+docker rm <container1 id> <container2 id> <container3 id> <etc>
+
+23) Remove an image:
+List all images present in local storage
+
+docker rmi -f registry:5000/alpine-note
+
+Remove image by Image ID
+
+docker rmi -f <container ID>
+
+Check the image list to verify the deletion
+
+docker imnages
+
+24) Remove stopped container, unused images/networks
+
+docker system prune -a
+
+25) Building image:
+
+Create a dockerfile and use the "registry:5000/ubuntu-base:18.04" image as base
+
+Docker file:
+```
+FROM registry:5000/ubuntu-base:18:04
+
+RUN apt-get update \
+	&& apt-get install -y sudo man-db manpages\
+	curl \
+	net-tools \
+	ssh
+```
+
+docker pull registry:5000/ubuntu-base:18:04
+
+Now, start the build process, --network=host is make sure that /etc/hosts/ and /etc/resolv.conf are used from host machine.
+
+Command: docker build --network=host -t test-ubuntu .
+
+The build process is finished and the image is ready.
+
+command : docker images
+
+The "test-ubuntu" is ready.
