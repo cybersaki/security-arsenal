@@ -1,0 +1,34 @@
+Containers using Runc
+
+1) Fetch the image and run it using runc
+
+Solution:
+
+Step 1: Check the list of repos on docker repository.
+
+Command: curl --insecure https://registry:5000/v2/_catalog
+
+There are four repositories.
+
+Step 2: Check the tags for "alpine" repository.
+
+command : curl -- insecure https://registry:5000/v2/alpine/tags/list
+
+step 3: Pull "alpine:latest" docker image using skopeo and save it in OCI format
+
+Commands: skepeo --insecure-policy copy --src-tls-verify=false docker://registry:5000/alpine oci:alpine-oci:latest
+
+Step 4: Check the image stored in OCI format
+
+Commands:
+
+ls -l
+find alpine-oci
+
+Step 5: Use umoci to convert OCI image to image bundle
+
+Command : umoci unpack --image alpine -oci alpinefs
+
+Step 6: Use the image bundle to create and run container using runc
+
+Command : runc run -b alpinefs ctrid
