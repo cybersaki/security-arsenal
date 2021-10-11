@@ -1,0 +1,165 @@
+PID Namespace
+Create a new PID namespace that is different from the host PID namespace.
+
+Step 1: Check existing namespaces.
+
+Command: lsns
+
+Step 2: Unshare command can be used to create a separate PID namespace. Check the help options for this command.
+
+Command: unshare -h
+
+Step 3: Create a new PID namespace with unshare command.
+
+Command: unshare --fork --pid --mount-proc bash
+
+And check the process IDs of processes running in this namespace.
+
+Command: ps -ef
+
+Observe that the bash command that was executed with unshare, is running with PID 1. That clearly shows that it is in a new PID namespace.
+
+Step 4: Check the difference in PIDs of a process inside the newly created PID namespace and host machine. To do this, run sleep 1000 command and background it.
+
+Command: sleep 1000 &
+
+Check the PID of sleep command, from inside the newly created namespace
+
+Command: ps -ef
+
+The PID of sleep process is 14
+
+Open a new terminal by clicking the “Lab Link” or copying the existing terminal link in a new tab.
+
+Check the process ID for sleep 1000 process on the host Linux machine.
+
+Command: ps -ef | grep sleep
+
+The PID of sleep process is 792. One can observe the difference between the PIDs.
+
+Step 5: List the namespaces again (on the host Linux machine) to observe the newly created namespaces.
+
+Command: lsns
+
+Two more namespaces are available. One of which is a PID namespace.
+
+Network Namespace:
+Create a new network namespace that is different from the host network namespace and add a dummy interface to it.
+
+Step 1: Check existing namespaces.
+
+Command: lsns
+
+One network namespace (TYPE net) is present.
+
+Step 2: Add a dummy interface.
+
+Command: ip link add ens10 type dummy
+
+Step 3: Verify that the interface is created
+
+Command: ifconfig ens10
+
+Step 4: Create a new network namespace named “testns”
+
+Command: ip netns add testns
+
+Step 5: List network namespaces
+
+Command: ip netns list
+
+Step 6: Add the dummy interface to “testns” namespace.
+
+Command: ip link set ens10 netns testns
+
+Step 7: Try to list the details of the dummy interface.
+
+Command: ifconfig ens10
+
+The listing failed because the dummy interface is moved to “testns”
+
+Step 8: Turn the dummy interface while selecting “testns” namespace.
+
+Command: ip netns exec testns ifconfig ens10 up
+
+Command executed normally.
+
+Step 9: Start a bash in “testns” namespace and list the interfaces.
+
+Commands:
+
+ip netns exec testns bash
+ifconfig
+
+The dummy interface can be observed in the listing.
+
+Create Custom Container:
+
+One will require the following components to create a Container.
+- Filesystem
+- Cgroup
+- Namespaces
+
+Filesystem: Use the filesystem of Alpine Linux image.
+
+Step 1: Pull alpine image from Docker registry
+
+Command: docker pull registry:5000/alpine
+
+Step 2: Pull alpine image from Docker registry
+
+Command: docker run -it registry:5000/alpine sh
+
+Step 3: Open a new terminal and check running containers.
+
+Command: docker ps
+
+Step 4: Create a folder /root/filesystem and copy all files from the container.
+
+Commands:
+mkdir /root/filesystem
+docker cp 61a3a709a9c8:/ filesystem/
+
+Step 5: Check the copied filesystem.
+
+Command: ls -l filesystem
+
+For CGroup and Namespaces use the following script:
+1 #! /bin/bash
+2 cd filesystem
+3 cgcreate -g cpu,cpuacct,memory:testc
+4 cgset -r cpu.shares=512 testc
+5 cgset -r memory.limit_in_bytes=1000000000 testc
+6 cgexec -g "cpu,cpuacct,memory:testc" unshare -fmuipn --mount-proc chroot /root/filesystem /bin/sh -c "/bin/mount -t proc proc /proc && /bin/sh"
+
+Description:
+Line 1 : Bash shebang line
+Line 2: Making /root/filesystem as present working directory (pwd)
+Line 3: Creating a Cgroup “testc” to control memory and CPU usage
+Line 4: Setting CPU usage limit for “testc”
+Line 5: Setting memory limit for “testc”
+Line 6: Run unshare to create new namespace while using the /root/filesystem as the filesystem and containing it with “testc” cgroup. /bin/sh is the default shell for Alpine Linux, it will be executed in this environment to give us command execution capability.
+
+Step 6: Save the provided script as container.sh and make it executable.
+
+Command: chmod +x container.sh
+
+Step 7: Execute the script and run uname -a from the sh prompt.
+
+Commands:
+./container.sh
+uname -a
+
+Step 8: Execute whoami command to check the current user and check the hostname.
+
+Command: whoami
+
+Command: cat /etc/hostname
+
+This is a basic container created by using an alpine filesystem and features of the host machine’s kernel (Cgroups and Namespaces).
+
+Step 9: Open a new terminal and list the namespaces.
+
+Command: lsns
+
+One can see the newly created namespaces
