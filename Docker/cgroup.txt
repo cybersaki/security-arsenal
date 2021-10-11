@@ -1,0 +1,74 @@
+Cgroups
+
+Cgroups or Control Groups are a Linux kernel feature to monitor and limit the resource usage of a process or a group of processes.
+
+Read more: https://man7.org/linux/man-pages/man7/cgroups.7.html
+
+To test the functionality of cgroup restrictions, we will use eatmemory, a memory eating utility.
+
+Github: https://github.com/julman99/eatmemory
+
+Step 1: Check the content of the home directory of the root user.
+
+Command: ls /root
+
+Step 2: Switch to the eatmemory directory and list the contents.
+
+Commands:
+
+cd eatmemory
+ls -l
+
+Step 3: Run make utility to build the binary and check if the binary is created.
+
+Commands:
+
+make
+ls -l
+
+Step 4: Execute the binary and check the help menu.
+
+Command: ./eatmemory -h
+
+Step 5: Run the binary to consume 2 GB of memory.
+
+Command: ./eatmemory 2G
+
+One can observe that the memory was consumed and eatmemory is still running (before we terminated it with Ctrl+C).
+
+Step 6: Create a memory cgroup named “test”.
+
+Command: cgcreate -g memory:test
+
+Step 7: Set memory limit of 4 MB to this cgroup.
+
+Command: cgset -r memory.limit_in_bytes=4194304 test
+
+Step 8 : Execute eatmemory to consume 2 GB memory but this time, confine it with “test” cgroup.
+
+Command: cgexec -g memory:test ./eatmemory 2G
+
+One can observe that eatmemory program got killed. This is because it tried to eat more memory (i.e. 2 GB) than allowed by the “test” cgroup (i.e. 4 MB).
+
+Step 9: Try with 4 MB (equals to allowed cgroup memory limit).
+
+Command: cgexec -g memory:test ./eatmemory 4M
+
+The program still got killed. Most probably because it tried to eat 4 MB and the program itself must be consuming some memory to run, hence taking total memory consumption by this process beyond 4 MB.
+
+Step 10: Try with 3 MB.
+
+Command: cgexec -g memory:test ./eatmemory 3M
+
+This time the process was not killed because it stayed in the limit of 4 MB.
+
+NameSpaces:
+
+Namespaces are features of Linux kernel to divide system resources into different logical partitions.
+There are different namespaces supported by the kernel.
+
+Read more: https://man7.org/linux/man-pages/man7/namespaces.7.html
+
+We will check on the most two prominent namespaces :
+1. Process ID (PID) Namespace
+2. Network Namespace
