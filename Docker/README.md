@@ -7,67 +7,69 @@
 5) Security Best practices
 
 
-# Docker basic commands :
+# 1) Docker basic commands :
 
 Please refer to the docker following files for docker basics :
 
-1) managing-containers.txt
-2) Process-management.txt
-3) podman-commands.txt
-4) containers-using-runc.txt
-5) multicontainer-setup.txt
-6) cgroup.txt
-7) PID_network_namespace.txt
+1.1) managing-containers.txt
+1.2) Process-management.txt
+1.3) podman-commands.txt
+1.4) containers-using-runc.txt
+1.5) multicontainer-setup.txt
+1.6) cgroup.txt
+1.7) PID_network_namespace.txt
 
 
-# Docker deployment tools :
+# 2) Docker deployment tools :
 
-### Container as a Service : 
+### 2.1) Container as a Service : 
 https://www.portainer.io/
 
-### Web interfaces for docker : 
+### 2.2) Web interfaces for docker : 
 https://github.com/francescou/docker-compose-ui
 https://github.com/tobegit3hub/seagull
 
-### Daemonless Open Containers Initiative :
+### 2.3) Daemonless Open Containers Initiative :
 https://docs.podman.io/en/latest/
 
 
-# Docker Security Analysis :
+# 3) Docker Security Analysis :
 
-### Security Source code analysis rules :
+### 3.1) Security Source code analysis rules :
 https://github.com/buddy-works/dockerfile-linter/blob/master/Rules.md#EF0004
 
-### API registry documentation :
+### 3.2) API registry documentation :
 
 Docker Registry HTTP API V2 : https://docs.docker.com/registry/spec/api/
 
 
-# Security Tools for analysis/Vulnerability assessment :
+# 4) Security Tools for analysis/Vulnerability assessment :
 
-### Docker file analysis tools :
+### 4.1) Docker file analysis tools :
 Dockerlint : https://github.com/buddy-works/dockerfile-linter
 Hadolint : https://github.com/hadolint/hadolint
 
-### Docker container/socket analysis tool : 
+### 4.2) Docker container/socket analysis tool : 
 Container : https://github.com/wagoodman/dive
 Container : https://github.com/docker/docker-bench-security
 Container : https://github.com/genuinetools/amicontained
 Socket : https://github.com/kost/dockscan
 
-### Vulnerability assessment framework : 
+### 4.3) Vulnerability assessment framework : 
 https://github.com/quay/clair
 
-### Cloud native runtime security for monitoring : 
+### 4.4) Cloud native runtime security for monitoring : 
 https://github.com/falcosecurity/falco
 
 
-# Security Best practices :
-### For writing a docker file :
+# 5) Security Best practices :
+## 5.1) For writing a docker file :
 https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 
-## Securing Docker :
-### 1) Enable TLS security support for SSH/TCP ports
+## 5.2) Securing Docker :
+### 5.2.1) Enable TLS security support for SSH/TCP ports
+
+#### Create certificate keys :
 ```
 mkdir certs
 cd certs
@@ -118,13 +120,13 @@ Try to push the already tagged alpine image to the registry.
 Command: docker push registry2:5000/alpine
 ```
 
-### 2) User namespace remapping : 
+### 5.2.2) User namespace remapping : 
 a) https://docs.docker.com/engine/security/userns-remap/ <br />
 b) https://github.com/flast101/docker-privesc
 
-### 3) Enabling authentication :
+### 5.2.3) Enabling authentication :
 
-#### Step 1: Stop the already running registry container.
+#### Stop the already running registry container.
 ```
 docker stop registry2
 ```
