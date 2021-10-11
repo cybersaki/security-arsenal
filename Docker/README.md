@@ -7,7 +7,6 @@
 5) Security Best practices
 
 <br />
-<br />
 
 # 1) Docker basic commands :
 
@@ -30,13 +29,12 @@ Please refer to the docker following files for docker basics :
 https://www.portainer.io/
 
 ### 2.2) Web interfaces for docker : 
-https://github.com/francescou/docker-compose-ui
+https://github.com/francescou/docker-compose-ui <br />
 https://github.com/tobegit3hub/seagull
 
 ### 2.3) Daemonless Open Containers Initiative :
 https://docs.podman.io/en/latest/
 
-<br />
 <br />
 
 # 3) Docker Security Analysis :
@@ -48,7 +46,6 @@ https://github.com/buddy-works/dockerfile-linter/blob/master/Rules.md#EF0004
 
 Docker Registry HTTP API V2 : https://docs.docker.com/registry/spec/api/
 
-<br />
 <br />
 
 # 4) Security Tools for analysis/Vulnerability assessment :
@@ -69,7 +66,6 @@ https://github.com/quay/clair
 ### 4.4) Cloud native runtime security for monitoring : 
 https://github.com/falcosecurity/falco
 
-<br />
 <br />
 
 # 5) Security Best practices :
@@ -130,13 +126,11 @@ Try to push the already tagged alpine image to the registry.
 Command: docker push registry2:5000/alpine
 ```
 <br />
-<br />
 
 ### 5.2.2) User namespace remapping : 
 a) https://docs.docker.com/engine/security/userns-remap/ <br />
 b) https://github.com/flast101/docker-privesc
 
-<br />
 <br />
 
 ### 5.2.3) Enabling authentication :
