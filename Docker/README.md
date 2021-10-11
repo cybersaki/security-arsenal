@@ -129,10 +129,15 @@ Try to push the already tagged alpine image to the registry.
 ```
 Command: docker push registry2:5000/alpine
 ```
+<br />
+<br />
 
 ### 5.2.2) User namespace remapping : 
 a) https://docs.docker.com/engine/security/userns-remap/ <br />
 b) https://github.com/flast101/docker-privesc
+
+<br />
+<br />
 
 ### 5.2.3) Enabling authentication :
 
