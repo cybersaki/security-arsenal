@@ -1,0 +1,37 @@
+Android Webview:
+----------------
+Android WebView is a system component powered by Chrome that allows Android apps to display web content.
+There are many apps out there that are simply wrappers around web pages, or web content stored in the app. 
+
+Android Webview debugging:
+--------------------------
+In Android WebViews have a debugging feature, that allows you to use the ADB remote debugging extension for chrome to debug the contents of the WebView. 
+2 ways to enable WebView
+1. Smali modification
+2. Frida 
+
+Let's start with smali modification
+
+Identify the application path and extract the apk from device.
+$ adb shell pm list packages
+$ adb shell pm path com.example.app
+$ adb pull /data/app/com.example.app/base.apk 
+
+Decompile apk using apktool
+$ apktool d base.apk 
+
+Figure out where to put the magic lines of code. Identify activity that will always run when the app starts.
+
+Add Magic smali code:
+const/4 v2, 0x1
+invoke-static {v2}, Landroid/webkit/WebView;->setWebContentsDebuggingEnabled(Z)V 
+
+First line sets a variable to true
+Second line passes that variable to the static method "setWebContentsDebuggingEnabled" in the WebView class. 
+
+Recompile the application
+$ apktool b ./base 
+Sign and install the application 
+
+Now Open chrome://inspect/devices and voila we can see the package name with inspect option. 
+Click on inspect and you can see all the resources loaded including js.
