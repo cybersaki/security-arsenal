@@ -1,6 +1,11 @@
 # Wifu Security cheatsheet 
 // (Copyrights from Liodeus Security Cheatsheet. Support him : https://liodeus.github.io/2020/10/29/OSWP-personal-cheatsheet.html )
 
+To start the card, 
+```
+ifconfig wlan0 up
+```
+
 ## WEP 
 
 ```
