@@ -1,4 +1,4 @@
-# Pentest-arsenal
+# Security-arsenal
 Security pentesting cheatsheet, tools for SAST/DAST, learning guides and roadmap, x86 and CVE scripts.
 
 1) Recon - CMS, network scan, directories, subdomains, certificate, web tech, secret repos.
