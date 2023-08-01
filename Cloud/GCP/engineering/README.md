@@ -1,8 +1,4 @@
 # Google Cloud Tools
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
-
 [Cloud SDK](https://cloud.google.com/sdk/) is a clietn tool used to to manage Google Cloud resources and applications with command-line tools and libraries. The Cloud SDK contains gcloud, gsutil, and bq command-line tools, which you can use to access [Compute Engine](https://cloud.google.com/compute), [Cloud Storage](https://cloud.google.com/storage), [BigQuery](https://cloud.google.com/bigquery), and more.
 
 [Google Cloud Shell](https://cloud.google.com/shell/) is a free admin machine with browser-based command-line access for managing your infrastructure and applications on Google Cloud Platform.
@@ -63,9 +59,6 @@
 
 
 # Google Cloud DevOps Tools Integration
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
 
 [Open Container Initiative](https://opencontainers.org/about/overview/) is an open governance structure for the express purpose of creating open industry standards around container formats and runtimes.
 
@@ -295,16 +288,6 @@
 
 [Pivotal Tracker](https://www.pivotaltracker.com/) is the agile project management tool of choice for developers around the world for real-time collaboration around a shared, prioritized backlog.
 
-# Networking
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
-<p align="center">
- <img src="https://user-images.githubusercontent.com/45159366/82833053-d1687b80-9e71-11ea-8c6d-074100f2f54b.png">
-  <br />
-</p>
-
-
 ## Networking Learning Resources
   
 [AWS Certified Security - Specialty Certification](https://aws.amazon.com/certification/certified-security-specialty/)
@@ -484,8 +467,6 @@ Networking works by piggybacks on a number of different protocols on top of each
 
 # Databases
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
 ## Database Learning Resources
 
 [SQL](https://en.wikipedia.org/wiki/SQL) is a standard language for storing, manipulating and retrieving data in relational databases.
@@ -569,8 +550,6 @@ Networking works by piggybacks on a number of different protocols on top of each
 [Sequel Pro](https://sequelpro.com/) is a fast MacOS database management tool for working with MySQL. This SQL management tool helpful for interacting with your database by easily to adding new databases, new tables, and new rows.
 
 # Telco 5G
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 <img src="https://user-images.githubusercontent.com/45159366/105409952-14881380-5be6-11eb-84fc-b07db69698ed.png">
  
@@ -666,8 +645,6 @@ Networking works by piggybacks on a number of different protocols on top of each
 [Network functions virtualization infrastructure(NFVI)](https://docs.vmware.com/en/VMware-vCloud-NFV/2.0/vmware-vcloud-nfv-reference-architecture-20/GUID-FBEA6C6B-54D8-4A37-87B1-D825F9E0DBC7.html) is the foundation of the overall NFV architecture. It provides the physical compute, storage, and networking hardware that hosts the VNFs. Each NFVI block can be thought of as an NFVI node and many nodes can be deployed and controlled geographically.
 
 # Open Source Security
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 
 [Open Source Security Foundation (OpenSSF)](https://openssf.org/) is a cross-industry collaboration that brings together leaders to improve the security of open source software by building a broader community, targeted initiatives, and best practices. The OpenSSF brings together open source security initiatives under one foundation to accelerate work through cross-industry support. Along with the Core Infrastructure Initiative and the Open Source Security Coalition, and will include new working groups that address vulnerability disclosures, security tooling and more.
@@ -833,7 +810,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # Kubernetes
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 [Kubernetes (K8s)](https://kubernetes.io/) is an open-source system for automating deployment, scaling, and management of containerized applications.
 
@@ -994,8 +970,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # Machine Learning
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
 <img src="https://user-images.githubusercontent.com/45159366/108111395-756e0480-7049-11eb-85ca-b87315e9d3ef.jpeg">
 
 ## ML frameworks & applications
@@ -1084,7 +1058,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # Node.js Development
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93719688-0becd700-fb39-11ea-9b87-3d52f1828aee.png">
@@ -1166,8 +1139,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 [Hexo](https://hexo.io/) is a A fast, simple & powerful blog framework, powered by Node.js. 
 
 # Java Development
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93925952-c0b6fd80-fccb-11ea-9f90-21c4148e3c86.png">
@@ -1273,7 +1244,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # Go Development
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93719679-068f8c80-fb39-11ea-8baa-9e779ee58a0a.png">
@@ -1355,7 +1325,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # Python Development
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93133273-ce490380-f68b-11ea-81d0-7f6a3debe6c0.png">
@@ -1481,8 +1450,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # TypeScript Development
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93133287-d1dc8a80-f68b-11ea-94d3-bba83dd5b0bb.png">
   <br />
@@ -1571,8 +1538,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # .NET Development
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93719689-0d1e0400-fb39-11ea-82e5-331a8ff8060d.png">
 
@@ -1640,8 +1605,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 
 # Ruby Development
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93719684-07282300-fb39-11ea-98fd-90394a2df6f2.png">
@@ -1713,8 +1676,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # PHP Development
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93925949-bf85d080-fccb-11ea-9158-d8d967a03e60.png">
   <br />
@@ -1782,8 +1743,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 # Bash/PowerShell Development
 
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
-
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/95128610-89564100-070e-11eb-83de-9697fb490886.png">
   <br />
@@ -1844,8 +1803,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 [VS Code Bash IDE](https://marketplace.visualstudio.com/items?itemName=mads-hartmann.bash-ide-vscode) is a Visual Studio Code extension utilizing the [bash language server](https://github.com/bash-lsp/bash-language-server/blob/master/bash-lsp), that is based on [Tree Sitter](https://github.com/tree-sitter/tree-sitter) and its [grammar for Bash](https://github.com/tree-sitter/tree-sitter-bash) and supports [explainshell](https://explainshell.com/) integration.
 
 # C/C++ Development
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/115297894-961e0d80-a111-11eb-81c3-e2bd2ac9a7cd.png">
@@ -1987,8 +1944,6 @@ It is extended by a set of privacy-specific requirements, control objectives and
 
 
 # Rust Development
-
-[Back to the Top](https://github.com/mikeroyal/Google-Cloud-Guide/blob/main/README.md#table-of-contents)
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/45159366/93025405-8dc98700-f5b2-11ea-93f9-12b4a0ef3001.png">
