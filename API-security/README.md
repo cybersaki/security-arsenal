@@ -15,6 +15,9 @@ For both
 - Import your wordlist
 - Replace the resource name eg /$user$/1/edit
 
+Tools :
+Akto : https://github.com/akto-api-security/akto
+
 ## Enumerating GraphQL
 
 Follow blog : https://escape.tech/blog/graphql-security-wordlist/?utm_source=tldrsec.com&utm_medium=newsletter&utm_campaign=tl-dr-sec-196-how-secrets-leak-in-ci-cd-ai-threat-modeling-supply-chain
