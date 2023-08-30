@@ -1,8 +1,4 @@
-# Under Construction:
-
--------------------------------------------------------------------------------------------------------------
-
-Enumerating RESTful APIs:
+## Enumerating RESTful APIs:
 fuzzdb /discovery/common-methods/common-methods.txt
 
 RESTful APIs can be challenging to enumerate, we need to guess the resource.
@@ -19,8 +15,29 @@ For both
 - Import your wordlist
 - Replace the resource name eg /$user$/1/edit
 
-Enumerating GraphQL
+## Enumerating GraphQL
 
+Follow blog : https://escape.tech/blog/graphql-security-wordlist/?utm_source=tldrsec.com&utm_medium=newsletter&utm_campaign=tl-dr-sec-196-how-secrets-leak-in-ci-cd-ai-threat-modeling-supply-chain
+
+
+Tools used : 
+Goctopus - [Goctopus](https://escape.tech/blog/introducing-goctopus/)
+Clairvoyance - https://github.com/nikitastupin/clairvoyance?ref=escape.tech
+
+Graphql security best practices : https://escape.tech/blog/9-graphql-security-best-practices/
+
+Graphql security cheatsheets :
+1) Escape 	  : https://escape.tech/blog/should-i-disable-introspection-in-graphql/
+2) Bookhacktricks : https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/graphql
+3) hdks		  : https://exploit-notes.hdks.org/exploit/web/api/graphql-pentesting/
+4) apisecurity	  : https://apisecurity.io/issue-82-common-graphql-vulnerabilities-pentesting-insomnia/
+5) gitbook 1	  : https://kathan19.gitbook.io/howtohunt/graphql/graphql
+6) gitbook 2	  : https://0xn3va.gitbook.io/cheat-sheets/web-application/graphql-vulnerabilities
+
+-------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+
+## TLDR : 
 GraphQL Voyager for visual representation
 
 API Versioning :
@@ -154,7 +171,7 @@ Start Hacking!
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
-API enumeration
+### API enumeration
 
 We want to primarily discover new URLs given a certain pattern
 We kno wthat /api/v1/users/1 exists, we want to know whether /api/v1/posts/exists
@@ -220,7 +237,7 @@ The easiest way to get information out of an API? Just ask
 	- An example request
 	- And an example response
 
-Swagger:
+## Swagger:
 - Swagger is a visualisation tool for APIs
 - It's usually accidentally left in when developers make APIs
 	- Not always though!
