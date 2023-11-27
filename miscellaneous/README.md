@@ -12,6 +12,6 @@ https://packetstormsecurity.com/files/158935/Linux-x86-dev-sda-Partition-Wiping-
 https://packetstormsecurity.com/files/158936/Linux-x86-execve-bin-sh-Shellcode.html
 
 ## HOFs :
-Lumosity HOF over mail.<br>  
-1 Private disclosure.<br>  
-Atos HOF : https://atos.net/en/lp/securitydive/hall-of-fame<br>  
+- Lumosity HOF over mail.<br>  
+- 1 Private disclosure.<br>  
+- Atos HOF : https://atos.net/en/lp/securitydive/hall-of-fame<br>  
