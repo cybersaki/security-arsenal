@@ -165,6 +165,7 @@ https://certdb.com/
 
 ### 1.33) crtsh:
 https://crt.sh/?q=%25domain.com
+curl -s https://crt.sh/?Identity=%.intel.com | grep ">*.intel.com" | sed 's/<[/]*[TB][DR]>/\n/g' | grep -vE "<|^[\*]*[\.]*.intel.com" | sort -u | awk 'NF'
 
 ### 1.34) Facebook certificate transparency monitoring systems :
 https://developers.facebook.com/tools/ct
